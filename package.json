@@ -1,7 +1,7 @@
 {
   "name": "console-debug",
-  "version": "0.0.1",
-  "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,lol and errors",
+  "version": "0.0.2",
+  "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors",
   "main": "debug.js",
   "scripts": {
     "test": "node test.js"
