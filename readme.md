@@ -1,6 +1,6 @@
 # What it does
 Replaces your console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors.
-It automagically shows you the line number and filename where the command was executed.
+It automagically shows you the line number and filename where the command was executed, along with a timestamp.
 
 
 
