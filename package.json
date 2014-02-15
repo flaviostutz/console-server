@@ -1,0 +1,22 @@
+{
+  "name": "console-debug",
+  "version": "0.0.1",
+  "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,lol and errors",
+  "main": "debug.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:michaeldegroot/console-debug.git"
+  },
+  "keywords": [
+    "debug",
+    "trace",
+    "console",
+    "log",
+    "output"
+  ],
+  "author": "Michael de Groot",
+  "license": "BSD-2-Clause"
+}
