@@ -18,5 +18,8 @@
     "output"
   ],
   "author": "Michael de Groot",
+  "dependencies": {
+     "cli-color": ">= 0.2.3"
+  },
   "license": "BSD-2-Clause"
 }
