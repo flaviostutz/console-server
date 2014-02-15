@@ -5,7 +5,11 @@ Replaces your console object with a more stylish and practical way of displaying
 
 # How does it look
 
-![Example](http://s15.postimg.org/cvkyicxzf/output.png)
+![Example1](http://s15.postimg.org/cvkyicxzf/output.png)
+
+![Example2](http://s29.postimg.org/co4sovpk7/uncaught.png)
+
+
 
 
 
