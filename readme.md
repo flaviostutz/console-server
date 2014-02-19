@@ -46,7 +46,14 @@
     console.error("I am a error!");
     console.debug("I am a debug!");
     console.info("I am a info!");
-    console.log(obj); // can also display objects
+	
+	// can also display objects
+	obj = {
+		test1: [1,2,3,4],
+		test3: ["ohai","there"],
+		test4: true
+	};
+    console.log(obj);
 	
 	
 ## 4. (optional) Passing the console object to other modules:
