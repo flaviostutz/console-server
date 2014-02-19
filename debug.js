@@ -1,4 +1,13 @@
-var Debug = function() {};
+var Settings = {};
+var Debug = function(set) {
+	if(set["uncaughtExceptionCatch"]){
+		process.on('uncaughtException', function (err) {
+			Debug.prototype.trace(err.stack,"ERROR");
+			Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
+		});	
+	}
+};
+
 
 var clc = require('cli-color'),
     error = clc.red.bold,
@@ -53,11 +62,6 @@ Debug.prototype.get_line_parent = function(){
         }
     }
 };
-
-process.on('uncaughtException', function (err) {
-	Debug.prototype.trace(err.stack,"ERROR");
-	Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
-});
 
 function getDateTime() {
     var format = "";

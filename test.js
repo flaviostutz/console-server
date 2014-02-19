@@ -1,5 +1,5 @@
 var Debug = require('./debug');
-var console = new Debug(); 
+var console = new Debug({uncaughtExceptionCatch: true}); 
 
 console.log("I am a log!");
 console.warn("I am a warn!");
