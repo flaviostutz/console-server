@@ -1,23 +1,36 @@
 (function() {
-	var clc = require('cli-color'),
+	var	fs = require('fs'),
+		clc = require('cli-color'),
+		path = require('path'),
 		dateFormat = require('dateformat'),
 		error = clc.red.bold,
 		debug = clc.white.bold,
 		log = clc.white.bold,
 		warn = clc.yellow.bold,
 		info = clc.cyanBright.bold,
+		logToFile = false,
+		noLogsFolder = false,
+		colors = true;
 		debugFilter = new Array;
 		
 	var Debug = function(set) {
+		// uncaughtException Setting
 		if(set["uncaughtExceptionCatch"]){
 			process.on('uncaughtException', function (err) {
 				Debug.prototype.trace(err.stack,"ERROR");
 				Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
 			});	
 		}
+		// Filter Setting
 		for(i=0;i<set["filter"].length;i++){
 			debugFilter.push(set["filter"][i])
 		}
+		
+		// logToFile Setting
+		logToFile = set["logToFile"]
+		
+		// Colors Setting
+		colors = set["colors"];
 	};
 
 
@@ -69,12 +82,12 @@
 	};
 
 	Debug.prototype.trace = function(msg, type) {
-		var completeMessage = "";
-		var format = dateFormat(new Date(), 'HH:MM:ss'), func = undefined;
-
-		var path = require('path'),
+		var completeMessage = "",
+			format = dateFormat(new Date(), 'HH:MM:ss'),
+			func = undefined;
 			appDir = path.dirname(require.main.filename),
 			p = this.get_file_parent();
+			
 		if(type != "ERROR"){
 			if (p) {
 				var parentfile = p.split(appDir)[1].substring(1);
@@ -84,21 +97,40 @@
 			}
 		}
 		
-		typeF = eval(type.toLowerCase()+"(type)")
+		if(colors) typeF = eval(type.toLowerCase()+"(type)")
+		if(!colors) typeF = type;
+		
 		if(type == "ERROR") func = "";
 			
+		// Filter process
 		for(i=0;i<debugFilter.length;i++){
 			if(type==debugFilter[i]) return;
 		}
 		
 		completeMessage = completeMessage + "("+format+") ["+typeF+""+func+"] - "+msg;
+		logMessage = "("+format+") ["+type+""+func+"] - "+msg;
+		
+		// Special display for objects
 		if(typeof(msg)=="object"){
 			console.log("("+format+") ["+typeF+""+func+"] - Object: ");
 			completeMessage = JSON.stringify(msg, null, 4);
 		}
 		console.log(completeMessage);
+		if(logToFile) this.logFile(logMessage);
 	};
 
+	Debug.prototype.logFile = function (msg){
+		fs.appendFile("logs/"+dateFormat(new Date(), 'dd-mm-yyyy')+".txt", msg, function (err) {
+		  if (err){
+			if (!fs.existsSync("logs/") && !noLogsFolder) {
+				console.error(error("It doesn't seem you have created a logs folder yet, trying to create one."));
+				fs.mkdir("logs/");
+				noLogsFolder = true;
+			}
+		  }
+		});
+	};
+	
 	Debug.prototype.log = function (msg){
 		this.trace(msg,"LOG");
 	};
