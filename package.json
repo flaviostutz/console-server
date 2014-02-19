@@ -1,6 +1,6 @@
 {
   "name": "console-debug",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors. There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file. You can also setup filters if you want the console or log to file not showing a certain debug message type.",
   "main": "debug.js",
   "scripts": {

@@ -21,7 +21,7 @@
 		if(set["uncaughtExceptionCatch"]){
 			process.on('uncaughtException', function (err) {
 				Debug.prototype.trace(err.stack,"ERROR");
-				Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
+				Debug.prototype.trace("Uncaught exception caught, please restart your application as it is unstable now.","ERROR");
 			});	
 		}
 		
@@ -115,8 +115,13 @@
 			if(type==consoleFilter[i]) return;
 		}
 		
-		completeMessage = completeMessage + "("+format+") ["+typeF+""+func+"] - "+msg;
+		if(type=="ERROR") completeMessage = completeMessage + "("+format+" - "+typeF+"  "+func+"            ) - "+msg;
+		if(type=="LOG") completeMessage =   completeMessage + "("+format+" - "+typeF+" "+func+") - "+msg;
+		if(type=="DEBUG") completeMessage = completeMessage + "("+format+" - "+typeF+" "+func+") - "+msg;
+		if(type=="INFO") completeMessage =  completeMessage + "("+format+" - "+typeF+"  "+func+") - "+msg;
+		if(type=="WARN") completeMessage =  completeMessage + "("+format+" - "+typeF+"  "+func+") - "+msg;
 		logMessage = "("+format+") ["+type+""+func+"] - "+msg;
+		
 		
 		// Special display for objects
 		if(typeof(msg)=="object"){
@@ -139,7 +144,9 @@
 				fs.mkdir(logDir,0755,function(e){
 					if(e){
 						console.error(error("The logs folder could not be created, please create one."));
+						return;
 					}
+					console.log("logs folder created!");
 				});
 			}
 		  }

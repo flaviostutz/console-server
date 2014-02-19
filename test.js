@@ -1,6 +1,6 @@
 var Debug = require('./debug');
 var console = new Debug({
-	uncaughtExceptionCatch: false, // Do we want to catch uncaughtExceptions?
+	uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
 	consoleFilter: [], // Filter these console output types, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
 	logToFile: true, // if true, will put console output in a log file folder called 'logs'
 	logFilter: ['LOG','DEBUG','INFO'], // Examples: Filter these types to not log to file, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
@@ -18,3 +18,6 @@ console.warn("I am a warn!");
 console.error("I am a error!");
 console.debug("I am a debug!");
 console.info("I am a info!");
+
+
+idontexists(); // will trigger uncaught exception
