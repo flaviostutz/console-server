@@ -18,22 +18,19 @@ It automagically shows you the line number and filename where the command was ex
 
 1. Start by installing the package:
     npm install console-debug
-	
-	
-2. Create a index.js file
 
 
-3. Put this in your index.js file
+2. Put this in your nodejs server file
 
-    var Debug = require('console-debug').Debug;
+    var Debug = require('./debug');
 
-    var console = new Debug(); 
+	var console = new Debug({uncaughtExceptionCatch: true}); 
 
 
 
 
 	
-4. Now you can do stuff like:
+3. Now you can do stuff like:
 
     console.log("I am a log!");
 
