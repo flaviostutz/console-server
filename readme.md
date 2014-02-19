@@ -24,7 +24,10 @@ It automagically shows you the line number and filename where the command was ex
 
     var Debug = require('./debug');
 
-	var console = new Debug({uncaughtExceptionCatch: true}); 
+	var console = new Debug({
+		uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
+		filter: [] // Examples: LOG, WARN, ERROR, DEBUG, INFO
+	}); 
 
 
 
