@@ -8,10 +8,13 @@
 		log = clc.white.bold,
 		warn = clc.yellow.bold,
 		info = clc.cyanBright.bold,
+		rootDir = path.dirname(require.main.filename),
+		logDir = rootDir + "\\logs\\",
 		logToFile = false,
 		noLogsFolder = false,
 		colors = true;
-		debugFilter = new Array;
+		consoleFilter = new Array,
+		logFilter = new Array;
 		
 	var Debug = function(set) {
 		// uncaughtException Setting
@@ -21,9 +24,14 @@
 				Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
 			});	
 		}
-		// Filter Setting
-		for(i=0;i<set["filter"].length;i++){
-			debugFilter.push(set["filter"][i])
+		
+		// Filter Settings
+		for(i=0;i<set["consoleFilter"].length;i++){
+			consoleFilter.push(set["consoleFilter"][i])
+		}
+		
+		for(i=0;i<set["logFilter"].length;i++){
+			logFilter.push(set["logFilter"][i])
 		}
 		
 		// logToFile Setting
@@ -84,10 +92,10 @@
 	Debug.prototype.trace = function(msg, type) {
 		var completeMessage = "",
 			format = dateFormat(new Date(), 'HH:MM:ss'),
-			func = undefined;
+			func = undefined,
 			appDir = path.dirname(require.main.filename),
 			p = this.get_file_parent();
-			
+		
 		if(type != "ERROR"){
 			if (p) {
 				var parentfile = p.split(appDir)[1].substring(1);
@@ -103,8 +111,8 @@
 		if(type == "ERROR") func = "";
 			
 		// Filter process
-		for(i=0;i<debugFilter.length;i++){
-			if(type==debugFilter[i]) return;
+		for(i=0;i<consoleFilter.length;i++){
+			if(type==consoleFilter[i]) return;
 		}
 		
 		completeMessage = completeMessage + "("+format+") ["+typeF+""+func+"] - "+msg;
@@ -116,16 +124,23 @@
 			completeMessage = JSON.stringify(msg, null, 4);
 		}
 		console.log(completeMessage);
-		if(logToFile) this.logFile(logMessage);
+		if(logToFile) this.logFile(logMessage,type);
 	};
 
-	Debug.prototype.logFile = function (msg){
-		fs.appendFile("logs/"+dateFormat(new Date(), 'dd-mm-yyyy')+".txt", msg, function (err) {
+	Debug.prototype.logFile = function (msg,type){
+		// Filter process
+		for(i=0;i<logFilter.length;i++){
+			if(type==logFilter[i]) return;
+		}
+		fs.appendFile(logDir + "["+type+"] - "+dateFormat(new Date(), 'dd-mm-yyyy') + ".txt", msg+"\n", function (err) {
 		  if (err){
-			if (!fs.existsSync("logs/") && !noLogsFolder) {
-				console.error(error("It doesn't seem you have created a logs folder yet, trying to create one."));
-				fs.mkdir("logs/");
-				noLogsFolder = true;
+			if (!fs.existsSync(logDir) && !noLogsFolder) {
+				console.error(error("no logs folder found (or no access) in '"+rootDir+"'. Trying to creating a logs folder at '"+logDir+"'"));
+				fs.mkdir(logDir,0755,function(e){
+					if(e){
+						console.error(error("The logs folder could not be created, please create one."));
+					}
+				});
 			}
 		  }
 		});
