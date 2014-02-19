@@ -1,7 +1,7 @@
 var Debug = require('./debug');
 var console = new Debug({
 	uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
-	filter: [] // Examples: LOG, WARN, ERROR, DEBUG, INFO
+	filter: [] // Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
 }); 
 
 console.log("I am a log!");
