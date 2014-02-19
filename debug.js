@@ -75,12 +75,13 @@
 		var path = require('path'),
 			appDir = path.dirname(require.main.filename),
 			p = this.get_file_parent();
-
-		if (p) {
-			var parentfile = p.split(appDir)[1].substring(1);
-			func = " @ "+parentfile+":"+this.get_line_parent();
-		} else {
-			return;
+		if(type != "ERROR"){
+			if (p) {
+				var parentfile = p.split(appDir)[1].substring(1);
+				func = " @ "+parentfile+":"+this.get_line_parent();
+			} else {
+				return;
+			}
 		}
 		
 		typeF = eval(type.toLowerCase()+"(type)")
@@ -91,6 +92,10 @@
 		}
 		
 		completeMessage = completeMessage + "("+format+") ["+typeF+""+func+"] - "+msg;
+		if(typeof(msg)=="object"){
+			console.log("("+format+") ["+typeF+""+func+"] - Object: ");
+			completeMessage = JSON.stringify(msg, null, 4);
+		}
 		console.log(completeMessage);
 	};
 
