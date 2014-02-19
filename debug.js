@@ -49,7 +49,7 @@ Debug.prototype.get_line_parent = function(){
     var sp = this.get_stack_parent();
     if (sp && sp.length) {
         for (var i=0;i<sp.length;i++) {
-            return sp[1].getLineNumber();
+            return sp[2].getLineNumber();
         }
     }
 };
@@ -87,12 +87,14 @@ Debug.prototype.trace = function(msg, type) {
         appDir = path.dirname(require.main.filename),
         p = this.get_file_parent();
 
-    if (p) {
-        var parentfile = p.split(appDir+"\\")[0];
-        func = " @ "+parentfile+":"+this.get_line_parent();
-    } else {
-        return;
-    }
+	if(type!="ERROR"){
+		if (p) {
+			var parentfile = p.split(appDir)[1].substring(1);
+			func = " @ "+parentfile+":"+this.get_line_parent();
+		} else {
+			return;
+		}
+	}
 
     if(type=="ERROR")
 		func = "";

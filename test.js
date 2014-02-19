@@ -1,4 +1,4 @@
-var Debug = require('console-debug').Debug;
+var Debug = require('./debug');
 var console = new Debug(); 
 
 console.log("I am a log!");
