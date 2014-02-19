@@ -28,8 +28,10 @@
     var Debug = require('console-debug');
     
     var console = new Debug({
-		uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
-		filter: [] // Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
+		uncaughtExceptionCatch: false, // Do we want to catch uncaughtExceptions?
+		filter: [], // Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
+		logToFile: true, // if true, will put console output in a log file folder called 'logs'
+		colors: true // do we want pretty pony colors in our console output?
 	}); 
 
 
