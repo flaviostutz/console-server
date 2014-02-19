@@ -23,10 +23,10 @@
 ## 1. Start by installing the package:
     npm install console-debug
 
-## 2. Put this in your nodejs server file
+## 2. Put this in your nodejs server file:
 
     var Debug = require('console-debug');
-	
+    
 	var console = new Debug({
 		uncaughtExceptionCatch: false, // Do we want to catch uncaughtExceptions?
 		consoleFilter: [], // Filter these console output types, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
@@ -49,6 +49,9 @@
     console.log(obj); // can also display objects
 	
 	
+## 4. (optional) Passing the console object to other modules:
+    
+    require('./myfile')(console); // myfile local scope will have now console object overwritten.
 
 # Contact
     You can contact me at specamps@gmail.com
