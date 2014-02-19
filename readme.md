@@ -12,10 +12,10 @@
     console.error("I am a error!");
     console.debug("I am a debug!");
     console.info("I am a info!");
-![Example1](http://s15.postimg.org/cvkyicxzf/output.png)
+![Example1](http://s21.postimg.org/8sgu1k0dj/image.png)
 
     Idonotexists();
-![Example2](http://s29.postimg.org/co4sovpk7/uncaught.png)
+![Example2](http://s21.postimg.org/7rglcfjdz/image.png)
 
 
 #  How do I use it?
