@@ -1,4 +1,4 @@
-var Settings = {};
+var debugFilter = new Array;
 var Debug = function(set) {
 	if(set["uncaughtExceptionCatch"]){
 		process.on('uncaughtException', function (err) {
@@ -6,10 +6,13 @@ var Debug = function(set) {
 			Debug.prototype.trace("It is recommended you RESET your current application, there has been a uncaughtexception!","ERROR");
 		});	
 	}
+	for(i=0;i<set["filter"].length;i++){
+		debugFilter.push(set["filter"][i])
+	}
 };
 
-
 var clc = require('cli-color'),
+	dateFormat = require('dateformat'),
     error = clc.red.bold,
     debug = clc.white.bold,
     warn = clc.yellow.bold,
@@ -63,29 +66,9 @@ Debug.prototype.get_line_parent = function(){
     }
 };
 
-function getDateTime() {
-    var format = "";
-    var date = new Date();
-    var sec  = date.getSeconds(),
-        min  = date.getMinutes(),
-        hour = date.getHours(),
-        year = date.getFullYear(),
-        month = date.getMonth() + 1,
-        day  = date.getDate();
-    sec = (sec < 10 ? "0" : "") + sec;
-    min = (min < 10 ? "0" : "") + min;
-    hour = (hour < 10 ? "0" : "") + hour;
-    day = (day < 10 ? "0" : "") + day;
-    month = (month < 10 ? "0" : "") + month;
-    format+=hour;
-    format+=":"+min;
-    format+=":"+sec;
-    return format;
-}
-
 Debug.prototype.trace = function(msg, type) {
     var completeMessage = "";
-    var format = getDateTime(), func = undefined;
+    var format = dateFormat(new Date(), 'HH:MM:ss'), func = undefined;
 
 	var path = require('path'),
         appDir = path.dirname(require.main.filename),
@@ -115,7 +98,10 @@ Debug.prototype.trace = function(msg, type) {
 
     if(type=="INFO")
         typeF = info('INFO');
-
+		
+	for(i=0;i<debugFilter.length;i++){
+		if(type==debugFilter) return;
+	}
     completeMessage = completeMessage + "("+format+") ["+typeF+""+func+"] - "+msg;
     console.log(completeMessage);
 };
