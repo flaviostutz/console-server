@@ -26,13 +26,9 @@
 		}
 		
 		// Filter Settings
-		for(i=0;i<set["consoleFilter"].length;i++){
-			consoleFilter.push(set["consoleFilter"][i])
-		}
+		consoleFilter = set["consoleFilter"];
 		
-		for(i=0;i<set["logFilter"].length;i++){
-			logFilter.push(set["logFilter"][i])
-		}
+		logFilter = set["logFilter"];
 		
 		// logToFile Setting
 		logToFile = set["logToFile"]
