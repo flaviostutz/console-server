@@ -1,11 +1,11 @@
-
-
 # What it does
 
 ###### Replaces your console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors. It automagically shows you the line number and filename where the command was executed, along with a timestamp. There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file. You can also setup filters if you want the console or log to not show a certain debug message type. ######
 
 
 # How does it look?
+
+![console-debug.gif](https://bitbucket.org/repo/a7AMxL/images/299473612-console-debug.gif)
 
     console.log("I am a log!");
     console.warn("I am a warn!");
@@ -62,5 +62,3 @@
 
 # Contact
     You can contact me at specamps@gmail.com
-
-	
