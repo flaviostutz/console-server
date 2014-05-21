@@ -5,7 +5,7 @@
 
 # How does it look?
 
-![console-debug.gif](https://bitbucket.org/repo/a7AMxL/images/299473612-console-debug.gif)
+![console-debug.gif](https://bitbucket.org/repo/a7AMxL/images/462483730-console-debug.gif)
 
     console.log("I am a log!");
     console.warn("I am a warn!");
