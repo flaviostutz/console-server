@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/console-debug.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/console-debug/)
+
 # What it does
 
 ###### Replaces your console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors. It automagically shows you the line number and filename where the command was executed, along with a timestamp. There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file. You can also setup filters if you want the console or log to not show a certain debug message type. ######
@@ -62,3 +64,5 @@
 
 # Contact
     You can contact me at specamps@gmail.com
+
+	

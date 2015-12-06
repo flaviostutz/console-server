@@ -1,14 +1,14 @@
 {
   "name": "console-debug",
-  "version": "0.1.7",
-  "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors. There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file. You can also setup filters if you want the console or log to file not showing a certain debug message type.",
+  "version": "0.2.4",
+  "description": "Replaces the console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors. There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file.",
   "main": "debug.js",
   "scripts": {
     "test": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:michaeldegroot/console-debug.git"
+    "url": "https://bitbucket.org/michaeldegroot/console-debug"
   },
   "keywords": [
     "debug",
@@ -17,11 +17,32 @@
     "log",
     "output"
   ],
-  "author": "Michael de Groot",
-  "dependencies": {
-     "cli-color": ">= 0.2.3",
-     "dateformat": ">= 1.0.7-1.2.3",
-	 "path": ">= 0.4.9"
+  "author": {
+    "name": "Michael de Groot"
   },
-  "license": "BSD-2-Clause"
+  "dependencies": {
+    "cli-color": ">= 0.2.3",
+    "dateformat": ">= 1.0.7-1.2.3",
+    "path": ">= 0.4.9"
+  },
+  "license": "BSD-2-Clause",
+  "_id": "console-debug@0.2.3",
+  "_shasum": "596f32c8e6cbe54854a8a692d44747973f582ad0",
+  "_from": "console-debug@",
+  "_resolved": "https://registry.npmjs.org/console-debug/-/console-debug-0.1.9.tgz",
+  "_npmVersion": "1.4.9",
+  "_npmUser": {
+    "name": "michaeldegroot",
+    "email": "specamps@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "michaeldegroot",
+      "email": "specamps@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "f5cf4aa939995003be99b1ee8ab1579a7e75788f",
+    "tarball": "http://registry.npmjs.org/console-debug/-/console-debug-0.1.9.tgz"
+  }
 }

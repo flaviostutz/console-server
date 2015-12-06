@@ -9,7 +9,7 @@
 		warn = clc.yellow.bold,
 		info = clc.cyanBright.bold,
 		rootDir = path.dirname(require.main.filename),
-		logDir = rootDir + "\\logs\\",
+		logDir = rootDir + "/logs/",
 		logToFile = false,
 		noLogsFolder = false,
 		colors = true;
@@ -21,7 +21,7 @@
 		if(set["uncaughtExceptionCatch"]){
 			process.on('uncaughtException', function (err) {
 				Debug.prototype.trace(err.stack,"ERROR");
-				Debug.prototype.trace("Uncaught exception caught, please restart your application as it is unstable now.","ERROR");
+				Debug.prototype.trace("Exception caught, program continuing.","WARN");
 			});	
 		}
 		
@@ -92,36 +92,37 @@
 			appDir = path.dirname(require.main.filename),
 			p = this.get_file_parent();
 		
-		if(type != "ERROR"){
 			if (p) {
-				var parentfile = p.split(appDir)[1].substring(1);
-				func = " @ "+parentfile+":"+this.get_line_parent();
+				if(p.split(appDir)[1]){
+					var parentfile = p.split(appDir)[1].substring(1);
+					func = " @ "+parentfile+":"+this.get_line_parent();
+				}else{
+					func = "";
+				}
 			} else {
 				return;
 			}
-		}
 		
 		if(colors) typeF = eval(type.toLowerCase()+"(type)")
 		if(!colors) typeF = type;
 		
-		if(type == "ERROR") func = "";
 			
 		// Filter process
 		for(i=0;i<consoleFilter.length;i++){
 			if(type==consoleFilter[i]) return;
 		}
 		
-		if(type=="ERROR") completeMessage = completeMessage + "("+format+" - "+typeF+"  "+func+"            ) - "+msg;
-		if(type=="LOG") completeMessage =   completeMessage + "("+format+" - "+typeF+" "+func+") - "+msg;
-		if(type=="DEBUG") completeMessage = completeMessage + "("+format+" - "+typeF+" "+func+") - "+msg;
-		if(type=="INFO") completeMessage =  completeMessage + "("+format+" - "+typeF+"  "+func+") - "+msg;
-		if(type=="WARN") completeMessage =  completeMessage + "("+format+" - "+typeF+"  "+func+") - "+msg;
+		if(type=="ERROR") completeMessage = completeMessage + "("+format+" "+typeF+""+func+") - "+msg;
+		if(type=="LOG") completeMessage =   completeMessage + "("+format+" "+typeF+""+func+") - "+msg;
+		if(type=="DEBUG") completeMessage = completeMessage + "("+format+" "+typeF+""+func+") - "+msg;
+		if(type=="INFO") completeMessage =  completeMessage + "("+format+" "+typeF+" "+func+") - "+msg;
+		if(type=="WARN") completeMessage =  completeMessage + "("+format+" "+typeF+" "+func+") - "+msg;
 		logMessage = "("+format+") ["+type+""+func+"] - "+msg;
 		
 		
 		// Special display for objects
 		if(typeof(msg)=="object"){
-			console.log("("+format+") ["+typeF+""+func+"] - Object: ");
+			console.log("("+format+" "+typeF+""+func+") - Object: ");
 			completeMessage = JSON.stringify(msg, null, 4);
 		}
 		console.log(completeMessage);
@@ -139,10 +140,10 @@
 				console.error(error("no logs folder found (or no access) in '"+rootDir+"'. Trying to creating a logs folder at '"+logDir+"'"));
 				fs.mkdir(logDir,0755,function(e){
 					if(e){
-						console.error(error("The logs folder could not be created, please create one."));
+						console.error(error("The logs folder could not be created (permissions?), please create one."));
 						return;
 					}
-					console.log("logs folder created!");
+					console.log("logs folder created, the next logs will be saved to file.");
 				});
 			}
 		  }
