@@ -21,3 +21,5 @@ console.info("I am a info!");
 
 
 idontexists(); // will trigger uncaught exception
+
+process.exit();
