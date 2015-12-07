@@ -1,6 +1,6 @@
 {
   "name": "console-debug",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
   "main": "debug.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "dateformat": ">= 1.0.7-1.2.3",
     "path": ">= 0.4.9"
   },
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "_id": "console-debug@0.2.3",
   "_shasum": "596f32c8e6cbe54854a8a692d44747973f582ad0",
   "_from": "console-debug@",
