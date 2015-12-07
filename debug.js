@@ -9,7 +9,7 @@
 		warn = clc.yellow.bold,
 		info = clc.cyanBright.bold,
 		rootDir = path.dirname(require.main.filename),
-		logDir = rootDir + "/logs/",
+		logDir = path.join(rootDir,"logs");
 		logToFile = false,
 		noLogsFolder = false,
 		colors = true;
@@ -134,7 +134,7 @@
 		for(i=0;i<logFilter.length;i++){
 			if(type==logFilter[i]) return;
 		}
-		fs.appendFile(logDir + dateFormat(new Date(), 'dd-mm-yyyy') + " - "+type+".txt", msg+"\n", function (err) {
+		fs.appendFile(path.join(logDir,dateFormat(new Date(), 'dd-mm-yyyy') + " - "+type)+".txt", msg+"\n", function (err) {
 		  if (err){
 			if (!fs.existsSync(logDir) && !noLogsFolder) {
 				console.error(error("no logs folder found (or no access) in '"+rootDir+"'. Trying to creating a logs folder at '"+logDir+"'"));
