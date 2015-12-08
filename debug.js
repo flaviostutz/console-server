@@ -85,7 +85,7 @@
 		}
 	};
 
-	Debug.prototype.trace = function(msg, type) {
+	Debug.prototype.trace = function(msg, type, test) {
 		var completeMessage = "",
 			format = dateFormat(new Date(), 'HH:MM:ss'),
 			func = undefined,
@@ -122,15 +122,17 @@
 		
 		// Special display for objects
 		if(typeof(msg)=="object"){
-			console.log("("+format+" "+typeF+""+func+") - Object: ");
+			if(!test) console.log("("+format+" "+typeF+""+func+") - Object: ");
 			completeMessage = JSON.stringify(msg, null, 4);
 		}
-		console.log(completeMessage);
+		if(!test) console.log(completeMessage);
 		if(logToFile) this.logFile(logMessage,type);
+		return msg;
 	};
 
-	Debug.prototype.logFile = function (msg,type){
+	Debug.prototype.logFile = function (msg,type,cb){
 		// Filter process
+		if(!cb) cb = false;
 		for(i=0;i<logFilter.length;i++){
 			if(type==logFilter[i]) return;
 		}
@@ -141,33 +143,38 @@
 				fs.mkdir(logDir,0755,function(e){
 					if(e){
 						console.error(error("The logs folder could not be created (permissions?), please create one."));
+						if(cb) cb(e);
 						return;
 					}
 					console.log("logs folder created, the next logs will be saved to file.");
+					if(cb) cb(true);
 				});
 			}
+		  }else{
+			if(cb) cb(true);
 		  }
 		});
 	};
 	
-	Debug.prototype.log = function (msg){
-		this.trace(msg,"LOG");
+	Debug.prototype.log = function (msg,test){
+		if(!test) test = false;
+		this.trace(msg,"LOG",test);return true;
 	};
 
-	Debug.prototype.debug = function (msg){
-		this.trace(msg,"DEBUG");
+	Debug.prototype.debug = function (msg,test){
+		this.trace(msg,"DEBUG",test);return true;
 	};
 
-	Debug.prototype.warn = function (msg){
-		this.trace(msg,"WARN");
+	Debug.prototype.warn = function (msg,test){
+		this.trace(msg,"WARN",test);return true;
 	};
 
-	Debug.prototype.info = function (msg){
-		this.trace(msg,"INFO");
+	Debug.prototype.info = function (msg,test){
+		this.trace(msg,"INFO",test);return true;
 	};
 
-	Debug.prototype.error = function (msg){
-		this.trace(msg,"ERROR");
+	Debug.prototype.error = function (msg,test){
+		this.trace(msg,"ERROR",test);return true;
 	};
 
 	module.exports = Debug;
