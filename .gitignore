@@ -1,5 +1,6 @@
-*.bat
-*.sh
 node_modules
-npm-debug.log
+node_modules/*
+*.log
+.coveralls.yml
+coverage
 logs
