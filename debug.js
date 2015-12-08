@@ -8,7 +8,7 @@
 		log = clc.white.bold,
 		warn = clc.yellow.bold,
 		info = clc.cyanBright.bold,
-		rootDir = path.dirname(require.main.filename),
+		rootDir = __dirname,
 		logDir = path.join(rootDir,"logs");
 		logToFile = false,
 		noLogsFolder = false,
@@ -19,10 +19,7 @@
 	var Debug = function(set) {
 		// uncaughtException Setting
 		if(set["uncaughtExceptionCatch"]){
-			process.on('uncaughtException', function (err) {
-				Debug.prototype.trace(err.stack,"ERROR");
-				Debug.prototype.trace("Exception caught, program continuing.","WARN");
-			});	
+			process.on('uncaughtException', function(err){this.uncaughtException(err)});	
 		}
 		
 		// Filter Settings
@@ -36,7 +33,11 @@
 		// Colors Setting
 		colors = set["colors"];
 	};
-
+	
+	Debug.prototype.uncaughtException = function(err){
+		Debug.prototype.trace(err.stack,"ERROR");
+		Debug.prototype.trace("Exception caught, program continuing.","WARN");
+	}
 
 	Debug.prototype.get_file_parent = function() {
 		var orig = Error.prepareStackTrace;
@@ -122,10 +123,10 @@
 		
 		// Special display for objects
 		if(typeof(msg)=="object"){
-			if(!test) console.log("("+format+" "+typeF+""+func+") - Object: ");
+			console.log("("+format+" "+typeF+""+func+") - Object: ");
 			completeMessage = JSON.stringify(msg, null, 4);
 		}
-		if(!test) console.log(completeMessage);
+		console.log(completeMessage);
 		if(logToFile) this.logFile(logMessage,type);
 		return msg;
 	};
@@ -141,11 +142,7 @@
 			if (!fs.existsSync(logDir) && !noLogsFolder) {
 				console.error(error("no logs folder found (or no access) in '"+rootDir+"'. Trying to creating a logs folder at '"+logDir+"'"));
 				fs.mkdir(logDir,0755,function(e){
-					if(e){
-						console.error(error("The logs folder could not be created (permissions?), please create one."));
-						if(cb) cb(e);
-						return;
-					}
+					if(e) throw new Error(e);
 					console.log("logs folder created, the next logs will be saved to file.");
 					if(cb) cb(true);
 				});
@@ -157,7 +154,6 @@
 	};
 	
 	Debug.prototype.log = function (msg,test){
-		if(!test) test = false;
 		this.trace(msg,"LOG",test);return true;
 	};
 

@@ -1,7 +1,15 @@
 var assert = require('assert');
 var assert = require('assert-plus');
+var path = require('path');
+var fs = require('fs');
+var rimraf = require('rimraf');
 var Debug = require('../debug');
 
+logDir = path.join(__dirname,"..","logs");
+
+rimraf(logDir, function(result){
+	console.log(result);
+})
 
 var consoleObject = new Debug({
 	uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
@@ -11,20 +19,6 @@ var consoleObject = new Debug({
 	colors: true // do we want pretty pony colors in our console output?
 }); 
 
-obj = {
-	test1: [1,2,3,4],
-	test2: ["ohai","there"],
-	test3:true
-};
-
-/**
-console.log("I am a log!");
-console.log(obj); // can also display objects
-console.warn("I am a warn!");
-console.error("I am a error!");
-console.debug("I am a debug!");
-console.info("I am a info!");
-*/
 describe("Stack getters", function(){
 	it('get_stack()', function(){
 		assert.doesNotThrow(function(){
@@ -50,23 +44,13 @@ describe("Internal functions", function(){
 			done();
 		});
 	});
-	it('Log function', function(){
-		assert.equal(consoleObject.trace("test","LOG",true),"test");
-	});
-	it('Warn function', function(){
-		assert.equal(consoleObject.trace("test","WARN",true),"test");
-	});
-	it('Error function', function(){
-		assert.equal(consoleObject.trace("test","ERROR",true),"test");
-	});
-	it('Debug function', function(){
-		assert.equal(consoleObject.trace("test","DEBUG",true),"test");
-	});
-	it('Info function', function(){
-		assert.equal(consoleObject.trace("test","INFO",true),"test");
-	});
 	it('Displaying a object', function(){
 		assert.object(consoleObject.trace({test1: [1,2,3,4],test2: ["ohai","there"],test3:true},"LOG",true));
+	});
+	it('Trigger a uncaught exception', function(){
+		assert.throws(function(){
+			consoleObject.uncaughtException();
+		},Error);
 	});
 });
 
@@ -75,16 +59,16 @@ describe("Console object", function(){
 		assert.equal(consoleObject.log("test","LOG",true),true);
 	});
 	it('Warn function', function(){
-		assert.equal(consoleObject.trace("test","WARN",true),"test");
+		assert.equal(consoleObject.warn("test","WARN",true),true);
 	});
 	it('Error function', function(){
-		assert.equal(consoleObject.trace("test","ERROR",true),"test");
+		assert.equal(consoleObject.error("test","ERROR",true),true);
 	});
 	it('Debug function', function(){
-		assert.equal(consoleObject.trace("test","DEBUG",true),"test");
+		assert.equal(consoleObject.debug("test","DEBUG",true),true);
 	});
 	it('Info function', function(){
-		assert.equal(consoleObject.trace("test","INFO",true),"test");
+		assert.equal(consoleObject.info("test","INFO",true),true);
 	});
 	it('Displaying a object', function(){
 		assert.object(consoleObject.trace({test1: [1,2,3,4],test2: ["ohai","there"],test3:true},"LOG",true));
