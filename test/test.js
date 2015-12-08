@@ -1,4 +1,7 @@
-var Debug = require('./debug');
+var assert = require('assert');
+var assert = require('assert-plus');
+var Debug = require('../debug');
+
 var console = new Debug({
 	uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
 	consoleFilter: [], // Filter these console output types, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
@@ -20,6 +23,8 @@ console.debug("I am a debug!");
 console.info("I am a info!");
 
 
-idontexists(); // will trigger uncaught exception
-
-process.exit();
+describe("Console.", function(){
+	it('log', function(){
+		assert.equal(console.log("I am a log!"),"kappa");
+	});
+});
