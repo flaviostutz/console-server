@@ -58,4 +58,4 @@ var console = new Debug({
     console.log(obj);
 ___
 # Contact
-You can contact me at specamps@gmail.com
+You can contact me at specamps@gmail.com 
