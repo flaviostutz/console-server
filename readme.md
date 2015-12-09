@@ -8,7 +8,7 @@
 ![](https://img.shields.io/npm/l/console-debug.svg)
 
 
-
+___
 # What it does
 Replaces your console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors.  
 It automagically shows you the line number and filename where the command was executed, along with a timestamp.  
@@ -16,10 +16,10 @@ There is also the ability to catch uncaughtExceptions, disable the output colors
 You can also setup filters if you want to hide certain debug message types.  
   
   [You can find a demo on how it looks here](https://bitbucket.org/repo/a7AMxL/images/462483730-console-debug.gif)
-  
+___
 # Changelog
 https://github.com/michaeldegroot/console-debug/commits/master
-  
+___
 #  Getting Started
 
 ##### 1. Start by installing the package:
@@ -56,6 +56,6 @@ var console = new Debug({
 		test4: true
 	};
     console.log(obj);
-
+___
 # Contact
 You can contact me at specamps@gmail.com
