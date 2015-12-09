@@ -1,8 +1,8 @@
 ![NPM](https://nodei.co/npm/console-debug.png?downloads=true&downloadRank=true&stars=true)
 
-[ ![Image](https://david-dm.org/michaeldegroot/console-debug.svg "deps") ](https://david-dm.org/michaeldegroot/console-debug "david-dm")
-[ ![Image](https://travis-ci.org/michaeldegroot/console-debug.svg?branch=master "testing") ](https://travis-ci.org/michaeldegroot/console-debug "travis-ci")
-[![Coverage Status](https://coveralls.io/repos/michaeldegroot/console-debug/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaeldegroot/console-debug?branch=master)
+[ ![](https://david-dm.org/michaeldegroot/console-debug.svg "deps") ](https://david-dm.org/michaeldegroot/console-debug "david-dm")
+[ ![](https://travis-ci.org/michaeldegroot/console-debug.svg?branch=master "testing") ](https://travis-ci.org/michaeldegroot/console-debug "travis-ci")
+[![](https://coveralls.io/repos/michaeldegroot/console-debug/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaeldegroot/console-debug?branch=master)
 ![NPM](https://img.shields.io/badge/Node-%3E%3D0.10-green.svg)
 ![](https://img.shields.io/npm/dt/console-debug.svg)
 ![](https://img.shields.io/npm/l/console-debug.svg)
@@ -18,7 +18,7 @@ You can also setup filters if you want to hide certain debug message types.
   [You can find a demo on how it looks here](https://bitbucket.org/repo/a7AMxL/images/462483730-console-debug.gif)
 ___
 # Changelog
-https://github.com/michaeldegroot/console-debug/commits/master
+[https://github.com/michaeldegroot/console-debug/commits/master](https://github.com/michaeldegroot/console-debug/commits/master)
 ___
 #  Getting Started
 
