@@ -1,9 +1,8 @@
-![NPM](https://nodei.co/npm/console-debug.png?downloads=true&downloadRank=true&stars=true)
-
-[ ![](https://david-dm.org/michaeldegroot/console-debug.svg "deps") ](https://david-dm.org/michaeldegroot/console-debug "david-dm")
-[ ![](https://travis-ci.org/michaeldegroot/console-debug.svg?branch=master "testing") ](https://travis-ci.org/michaeldegroot/console-debug "travis-ci")
+[![](https://nodei.co/npm/console-debug.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/console-debug)   
+[![](https://david-dm.org/michaeldegroot/console-debug.svg "deps") ](https://david-dm.org/michaeldegroot/console-debug "david-dm")
+[![](https://travis-ci.org/michaeldegroot/console-debug.svg?branch=master "testing") ](https://travis-ci.org/michaeldegroot/console-debug "travis-ci")
 [![](https://coveralls.io/repos/michaeldegroot/console-debug/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaeldegroot/console-debug?branch=master)
-![NPM](https://img.shields.io/badge/Node-%3E%3D0.10-green.svg)
+![](https://img.shields.io/badge/Node-%3E%3D0.10-green.svg)
 ![](https://img.shields.io/npm/dt/console-debug.svg)
 ![](https://img.shields.io/npm/l/console-debug.svg)
 
@@ -30,11 +29,11 @@ ___
 var Debug = require('console-debug');
 
 var console = new Debug({
-	uncaughtExceptionCatch: false, // Do we want to catch uncaughtExceptions?
-	consoleFilter: [], // Filter these console output types, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
-	logToFile: true, // if true, will put console output in a log file folder called 'logs'
-	logFilter: ['LOG','DEBUG','INFO'], // Examples: Filter these types to not log to file
-	colors: true // do we want pretty pony colors in our console output?
+	uncaughtExceptionCatch: false,      // Do we want to catch uncaughtExceptions?
+	consoleFilter: ['LOG', 'WARN'],     // Filter these console output types
+	logToFile: true,                    // if true, will put console output in a log file folder called 'logs'
+	logFilter: ['LOG','DEBUG','INFO'],  // Examples: Filter these types to not log to file
+	colors: true                        // do we want pretty pony colors in our console output?
 }); 
 ````
 
