@@ -12,11 +12,11 @@ rimraf(logDir, function(result){
 })
 
 var consoleObject = new Debug({
-	uncaughtExceptionCatch: true, // Do we want to catch uncaughtExceptions?
-	consoleFilter: [], // Filter these console output types, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
-	logToFile: true, // if true, will put console output in a log file folder called 'logs'
-	logFilter: [], // Examples: Filter these types to not log to file, Examples: 'LOG', 'WARN', 'ERROR', 'DEBUG', 'INFO'
-	colors: true // do we want pretty pony colors in our console output?
+	uncaughtExceptionCatch: true,
+	consoleFilter: [],
+	logToFile: true,
+	logFilter: [],
+	colors: true
 }); 
 
 describe("Stack getters", function(){
