@@ -17,6 +17,9 @@ You can also setup filters if you want to hide certain debug message types.
   
   [You can find a demo on how it looks here](https://bitbucket.org/repo/a7AMxL/images/462483730-console-debug.gif)
   
+# Changelog
+https://github.com/michaeldegroot/console-debug/commits/master
+  
 #  Getting Started
 
 ##### 1. Start by installing the package:
