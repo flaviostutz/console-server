@@ -12,7 +12,6 @@ rimraf(logDir, function(result){
 })
 
 var consoleObject = new Debug({
-	uncaughtExceptionCatch: true,
 	consoleFilter: [],
 	logToFile: true,
 	logFilter: [],
@@ -73,4 +72,37 @@ describe("Console object", function(){
 	it('Displaying a object', function(){
 		assert.object(consoleObject.trace({test1: [1,2,3,4],test2: ["ohai","there"],test3:true},"LOG",true));
 	});
+	it('Log function without colors', function(){
+		var consoleObject = new Debug({
+			consoleFilter: [],
+			logToFile: true,
+			logFilter: [],
+			colors: false
+		});
+		assert.equal(consoleObject.trace("test","LOG",true),"test");
+	});
+	it('Log function with a filter', function(){
+		var consoleObject = new Debug({
+			consoleFilter: ['LOG'],
+			logToFile: true,
+			logFilter: [],
+			colors: false
+		});
+		assert.equal(consoleObject.trace("test","LOG",true),true);
+	});
+	
+	it('Log function with a filter', function(done){
+		var consoleObject = new Debug({
+			consoleFilter: [],
+			logToFile: true,
+			logFilter: ['LOG'],
+			colors: false
+		});
+		consoleObject.logFile("test","LOG", function(result){
+			assert.equal(result,true);
+			done();
+		});
+	});
+	
+	 
 });
