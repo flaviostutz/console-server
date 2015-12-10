@@ -37,12 +37,6 @@ describe("Stack getters", function(){
 });
 
 describe("Internal functions", function(){
-	it('Log to file', function(done){
-		consoleObject.logFile("test","test", function(result){
-			assert.equal(result,true);
-			done();
-		});
-	});
 	it('Displaying a object', function(){
 		assert.object(consoleObject.trace({test1: [1,2,3,4],test2: ["ohai","there"],test3:true},"LOG",true));
 	});
@@ -90,8 +84,17 @@ describe("Console object", function(){
 		});
 		assert.equal(consoleObject.trace("test","LOG",true),true);
 	});
-	
-	it('Log function with a filter', function(done){
+});
+
+
+describe("Log to file", function(){
+	it('Log to file', function(done){
+		consoleObject.logFile("test","test", function(result){
+			assert.equal(result,true);
+			done();
+		});
+	});
+	it('Log to file while logFilter is set to LOG', function(done){
 		var consoleObject = new Debug({
 			consoleFilter: [],
 			logToFile: true,
@@ -103,6 +106,4 @@ describe("Console object", function(){
 			done();
 		});
 	});
-	
-	 
 });
