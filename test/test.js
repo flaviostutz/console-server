@@ -88,20 +88,20 @@ describe("Console object", function(){
 
 
 describe("Log to file", function(){
-	it('Log to file', function(done){
-		consoleObject.logFile("test","test", function(result){
-			assert.equal(result,true);
-			done();
-		});
-	});
-	it('Log to file while logFilter is set to LOG', function(done){
+	it('Log to file while logFilter is set to LOG', function(){
 		var consoleObject = new Debug({
 			consoleFilter: [],
 			logToFile: true,
 			logFilter: ['LOG'],
 			colors: false
 		});
-		consoleObject.logFile("test","LOG", function(result){
+		assert.doesNotThrow(function(){
+			consoleObject.logFile("test","LOG", function(result){
+			});
+		},Error);
+	});
+	it('Log to file', function(done){
+		consoleObject.logFile("test","test", function(result){
 			assert.equal(result,true);
 			done();
 		});
