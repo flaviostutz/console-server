@@ -25,7 +25,7 @@ ___
     npm install console-debug
 
 ##### 2. Load the code
-```Javascript
+```js
 var Debug = require('console-debug');
 
 var console = new Debug({
@@ -41,20 +41,21 @@ var console = new Debug({
 
 	
 ##### 3. Do awesome stuff!
+```js
+console.log("I am a log!");
+console.warn("I am a warn!");
+console.error("I am a error!");
+console.debug("I am a debug!");
+console.info("I am a info!");
 
-    console.log("I am a log!");
-    console.warn("I am a warn!");
-    console.error("I am a error!");
-    console.debug("I am a debug!");
-    console.info("I am a info!");
-	
-	// can also display objects
-	obj = {
-		test1: [1,2,3,4],
-		test3: ["ohai","there"],
-		test4: true
-	};
-    console.log(obj);
+// can also display objects
+obj = {
+	test1: [1,2,3,4],
+	test3: ["ohai","there"],
+	test4: true
+};
+console.log(obj);
+````
 ___
 # Contact
 You can contact me at specamps@gmail.com 
