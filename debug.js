@@ -106,7 +106,11 @@ Debug.prototype.trace = function(msg, type, test) {
 	
 	if(typeof(msg)=="object"){
 		console.log("("+format+" "+typeF+"  "+func+") - Object: ");
-		completeMessage = JSON.stringify(msg, null, 4);
+    try {
+      completeMessage = JSON.stringify(msg, null, 4);
+    } catch (e) {
+      completeMessage = msg;
+    }
 	}
 	console.log(completeMessage);
 	if(logToFile) this.logFile(logMessage,type);
