@@ -31,7 +31,7 @@
   "license": "MIT",
   "devDependencies": {
     "assert": "^1.3.0",
-    "assert-plus": "^0.2.0",
+    "assert-plus": "^1.0.0",
     "coveralls": "^2.11.4",
     "istanbul": "^0.4.1",
     "mocha": "^2.3.4",
