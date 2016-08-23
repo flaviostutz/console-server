@@ -26,7 +26,8 @@
   "dependencies": {
     "cli-color": ">= 0.2.3",
     "dateformat": ">= 1.0.7-1.2.3",
-    "path": ">= 0.4.9"
+    "path": ">= 0.4.9",
+    "right-pad": "^1.0.1"
   },
   "license": "MIT",
   "devDependencies": {
