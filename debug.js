@@ -9,7 +9,6 @@ var log = clc.white.bold
 var warn = clc.yellow.bold
 var info = clc.cyanBright.bold
 
-
 var rootDir = __dirname
 var logDir = path.join(rootDir, 'logs')
 var logToFile = false
