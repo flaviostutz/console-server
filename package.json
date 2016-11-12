@@ -1,6 +1,6 @@
 {
   "name": "console-debug",
-  "version": "0.4.1b",
+  "version": "0.4.2",
   "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
   "main": "debug.js",
   "scripts": {
