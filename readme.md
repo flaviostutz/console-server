@@ -11,8 +11,11 @@
 
 ___
 # What it does
-Replace your console object with a more informative output display. Featuring:
-- [x] Pretty error print
+Replace your console object with a more informative output display.
+
+___
+# Features
+- [ ] Pretty error print
 - [ ] Filename and Linenumber display where it was executed
 - [ ] Pretty array, object and json output
 - [ ] Smart truncation
@@ -22,9 +25,6 @@ Replace your console object with a more informative output display. Featuring:
 - [ ] log stdout to file
 - [ ] quiet flag for turning messages on/off
 
-___
-# Changelog
-[https://github.com/michaeldegroot/console-debug/commits/master](https://github.com/michaeldegroot/console-debug/commits/master)
 ___
 #  Getting Started
 
@@ -44,6 +44,18 @@ const consoleDebug = require('console-debug')
 ```js
 // TODO: add stuff
 ````
+
+___
+# Contributors
+#### - [Will Hilton](https://github.com/wmhilton)
+
+___
+# Contributing
+Check out [CONTRIBUTING.md](https://github.com/michaeldegroot/console-debug/blob/master/CONTRIBUTING.md) and thanks for supporting open source!
+
+___
+# [Changelog](https://github.com/michaeldegroot/console-debug/commits/master)
+
 ___
 # Contact
 You can contact me at specamps@gmail.com

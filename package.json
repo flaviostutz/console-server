@@ -4,6 +4,7 @@
   "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
   "main": "main.js",
   "scripts": {
+    "lint": "node ./node_modules/eslint/bin/eslint.js --config ./.eslintrc --ext .js src ./**/*.js",
     "test": "mocha",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "coveralls": "npm bin /istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/* && node node_modules/coveralls/bin/coveralls.js < coverage/lcov.info"
@@ -12,6 +13,11 @@
     "type": "git",
     "url": "https://github.com/michaeldegroot/console-debug"
   },
+  "pre-commit": [
+    "lint",
+    "test",
+    "cover"
+  ],
   "keywords": [
     "debug",
     "trace",
@@ -31,12 +37,13 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "assert": "^1.4.1",
     "assert-plus": "^1.0.0",
     "coveralls": "^2.11.15",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
-    "mocha-lcov-reporter": "^1.2.0"
+    "mocha-lcov-reporter": "^1.2.0",
+    "eslint": "^3.10.2",
+    "pre-commit": "^1.1.3"
   },
   "dependencies": {
     "pretty-error": "^2.0.2",

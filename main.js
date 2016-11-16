@@ -2,10 +2,11 @@
 
 const errorStack = require('./libs/errorstack')
 
-// errorStack.capture()
-// console.log(errorStack.formatStack(errorStack.getStack()))
+errorStack.capture()
+console.log(errorStack.formatStack(errorStack.getStack()))
 
 errorStack.catchExceptions()
 
-
-fgds // <--- test exception
+exports.log = (msg) => {
+    console.log(msg)
+}

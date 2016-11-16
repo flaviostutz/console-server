@@ -2,8 +2,8 @@
 
 const stackTrace  = require('stack-trace')
 const path        = require('path')
-const PrettyError = require('pretty-error')
-const pe          = new PrettyError()
+// const PrettyError = require('pretty-error')
+// const pe          = new PrettyError()
 
 // NOTE: There are two stacktrace types:
 // native stacktrace: this is the return output provided by the module stackTrace.
@@ -104,7 +104,7 @@ exports.formatTrace = trace => {
 const verifyIsConsoleDebugStack = stack => {
     let error = false
     if (stack.length >= 1) {
-        if (!stack[0].hasOwnProperty('isFromConsoleDebug')) {
+        if (stack[0].hasOwnProperty('isFromConsoleDebug') === false) {
             error = true
         }
     } else {
@@ -119,6 +119,6 @@ const verifyIsConsoleDebugStack = stack => {
 // Makes sure that currentTrace exists
 const verifyStackExists = () => {
     if (currentTrace === false) {
-        throw new Error('Cannot get stack from a non-captured trace')
+        throw new Error('Cannot get trace from a non-captured stack')
     }
 }
