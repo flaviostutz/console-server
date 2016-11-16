@@ -23,7 +23,7 @@ To make sure the whole projects follows the same code style, there is a `.eslint
 To run the linting test run: `npm run lint`
 
 
-*It's important to note that on every commit the package `pre-commit` executes a `npm run lint` and a `npm run test` and disallows the commit if the either failed!*
+*It's important to note that on every commit the package `pre-commit` executes a `npm run lint` and a `npm run test` and disallows the commit if either failed!*
 
 
 ### Coverage
