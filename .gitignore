@@ -1,7 +1,2 @@
 node_modules
-node_modules/*
 *.log
-.coveralls.yml
-coverage
-logs
-localtest.js
