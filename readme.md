@@ -51,7 +51,7 @@ ___
 
 ___
 # Contributing
-Check out [CONTRIBUTING.md](https://github.com/michaeldegroot/console-debug/blob/master/CONTRIBUTING.md) and thanks for supporting open source!
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) and thanks for supporting open source!
 
 ___
 # [Changelog](https://github.com/michaeldegroot/console-debug/commits/master)
