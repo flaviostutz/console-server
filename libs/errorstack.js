@@ -2,7 +2,7 @@
 
 const stackTrace = require('stack-trace')
 const path       = require('path')
-const renderer   = require('./renderer')
+const render   = require('./render')
 const util       = require('./util')
 
 const projectRoot = util.resolveProjectRoot()
@@ -35,46 +35,7 @@ exports.catchExceptions = () => {
 exports.renderStack = (stack) => {
     verifyIsConsoleDebugStack(stack)
 
-    // A 'header' template. This is used for showing exceptions or other useful title messages
-    let header = ''
-
-    // Show a error
-    if (exports.capturedError) {
-        header += `
-            <exception>Error</exception>:<exceptiontext>${exports.capturedError}</exceptiontext>
-        `
-    }
-
-    // Add the li 'traces'
-    let traces = ''
-    for (let i = stack.length - 1; i >= 0; i--) {
-        const trace      = stack[i]
-        let functionName = stack[i].functionName
-        if (functionName === null) {
-            functionName = ''
-        }
-
-        const fileNameTruncated = util.truncateFilePath(trace.fileName)
-
-        // A 'traces' template
-        traces += `
-            <li>
-                - <filename>${fileNameTruncated}</filename>:<line>${trace.lineNumber}</line>
-                <function>${functionName}</function>
-                <subtext>${trace.fileName}:${trace.lineNumber}:${trace.columnNumber}</subtext>
-            </li>
-        `
-    }
-
-    // Render the main template
-    renderer.display(`
-        <ul>
-            ${header}
-            <li>
-                ${traces}
-            </li>
-        </ul>
-    `)
+    render.stack(stack)
 }
 
 // Parses a javascript error object to a console-debug stacktrace

@@ -33,7 +33,7 @@ describe('Exception Test Suite', () => {
 
     it('Sets a style', () => {
         assert.doesNotThrow(() => {
-            consoleDebug.renderer.styleLoader.setStyle({
+            consoleDebug.render.styleLoader.setStyle({
                 error: {
                     color: 'green',
                 },
