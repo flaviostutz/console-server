@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "node ./node_modules/eslint/bin/eslint.js --config ./.eslintrc --ext .js src ./**/*.js",
     "test": "mocha",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "coveralls": "npm bin /istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/* && node node_modules/coveralls/bin/coveralls.js < coverage/lcov.info"
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   },
   "repository": {
     "type": "git",
@@ -39,14 +38,17 @@
   "devDependencies": {
     "assert-plus": "^1.0.0",
     "coveralls": "^2.11.15",
+    "eslint": "^3.10.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
-    "eslint": "^3.10.2",
+    "package-script": "^0.0.8",
     "pre-commit": "^1.1.3"
   },
   "dependencies": {
-    "pretty-error": "^2.0.2",
+    "app-root-path": "^2.0.1",
+    "istanbul": "^0.4.5",
+    "renderkid": "^2.0.0",
     "stack-trace": "^0.0.9"
   }
 }
