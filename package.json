@@ -42,12 +42,12 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
+    "istanbul": "^0.4.5",
     "package-script": "^0.0.8",
     "pre-commit": "^1.1.3"
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
-    "istanbul": "^0.4.5",
     "renderkid": "^2.0.0",
     "stack-trace": "^0.0.9"
   }

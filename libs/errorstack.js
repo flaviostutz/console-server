@@ -139,6 +139,7 @@ exports.getStack = () => {
             typeName:           currentTrace[i].getTypeName(),
             methodName:         currentTrace[i].getMethodName(),
             functionName:       currentTrace[i].getFunctionName(),
+            isNative:           currentTrace[i].isNative(),
             isFromConsoleDebug: isFromConsoleDebug,
             isFromClientModule: isFromClientModule,
         })
