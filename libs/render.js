@@ -13,6 +13,8 @@ exports.capturedError = false
 
 // How a the html is rendered by renderKid
 exports.html = html => {
+    console.log(html)
+
     // Get the style again, because it might have changed
     const r = new RenderKid()
     r.style(styleLoader.getStyle())
