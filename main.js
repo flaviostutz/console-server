@@ -41,7 +41,7 @@ exports.info = (firstArg) => {
 
 exports.fatal = (firstArg) => {
     errorStack.catchExceptions()
-    throw new Error(firstArg, 'fatal')
+    throw new Error(firstArg)
 }
 
 exports.trace = () => {

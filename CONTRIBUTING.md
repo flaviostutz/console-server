@@ -12,6 +12,30 @@ yarn
 
 **Alright!** Dev env is setup. Now what can we do??
 
+### Project structure
+#### main.js
+*Console-debug's entry point file*
+#### libs/
+*Holds all important module code that console-debug works with*
+##### libs/errorstack.js
+*Contains code on how to work with stacktraces*
+##### libs/render.js
+*Contains code on how to render stacktraces*
+##### libs/util.js
+*Contains code that is considered to be re-used trough out the project in serveral modules*
+#### styles/
+*A folder that holds the theme code*
+##### styles/loader.js
+*This file can load themes*
+##### styles/src
+*This folder contains all the availible themes*
+#### test/
+*Contains test files/folders*
+##### test/coverage
+*Contains the coverage report and instrument files*
+##### test/tests
+*Contains the actual test files*
+
 ### Testing
 in the folder `test` you will see the mocha test units
 

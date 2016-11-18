@@ -68,7 +68,7 @@ exports.stack = stack => {
     console.log(exports.html(output))
 }
 
-exports.console = a => {
+exports.console = (msg, type) => {
     const stack = errorStack.getStack()
     let output  = ''
 
@@ -82,10 +82,10 @@ exports.console = a => {
             const fileName = util.truncateFilePath(trace.fileName)
 
             // And normalize the input
-            const renderText = util.normalizeInput(a)
+            const renderText = util.normalizeInput(msg)
 
             output += `
-                <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
+                <${type}>${type}</${type}><filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
                 <consoletext>${renderText}</consoletext>
             `
         }
