@@ -1,5 +1,5 @@
 # Contributing
-Make sure `grunt test` doesn't error and it's all good in the hood :)
+Make sure the `grunt` command doesn't error and it's all good in the hood :)
 
 ### Setting up development
 
