@@ -18,6 +18,8 @@ describe('Exception Test Suite', () => {
     })
 
     it('Renders a non-cleaned console-debug stacktrace', () => {
+        console.log(errorStack.getStack())
+        errorStack.getStack()
         errorStack.renderStack(errorStack.getStack())
         assert.doesNotThrow(() => {
             errorStack.renderStack(errorStack.getStack())
