@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             ],
             options: {
                 lazy:     true,
-                basePath: 'test/coverage/instrument/',
+                basePath: './test/coverage/instrument/',
             }
         },
         mochaTest: {

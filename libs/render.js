@@ -8,7 +8,7 @@ const util        = require('./util')
 // Expose some modules that libs depend on
 exports.styleLoader = styleLoader
 
-// By default the capturedError is false
+// By default the capturedError is false (a module is supposed to set this value for exports.stack header)
 exports.capturedError = false
 
 // How a the html is rendered by renderKid
@@ -73,10 +73,15 @@ exports.console = a => {
     let output  = ''
 
     for (let i = 0; i < stack.length; i++) {
+        // Capture the trace where errorStack.capture() was called
         if (stack[i].methodName === 'capture' && stack[i].isFromConsoleDebug) {
+            // Then go back 2 traces and start to render from there.
             const trace = stack[i - 2]
+
+            // Truncate long filepaths
             const fileName = util.truncateFilePath(trace.fileName)
 
+            // And normalize the input
             const renderText = util.normalizeInput(a)
 
             output += `

@@ -15,13 +15,13 @@ Replace your console object with a more informative output display.
 
 ___
 # Features
-- [ ] Pretty error print
-- [ ] Filename and Linenumber display where logs where executed
+- [X] Pretty error print
+- [X] Filename and Linenumber display where logs where executed
 - [ ] Pretty array, object and json output
 - [ ] Smart truncation
 - [ ] Event emitters
 - [ ] Optional timezone configuration
-- [ ] Coloring of output
+- [X] Coloring of output
 - [ ] log stdout to file
 - [ ] quiet flag for turning messages on/off
 

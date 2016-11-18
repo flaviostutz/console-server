@@ -3,12 +3,16 @@
 // The goal of this test is to run all code and check for exceptions, not the integrity of the output itself.
 
 const assert       = require('assert-plus')
-const consoleDebug = require('./coverage/instrument/main')
+const consoleDebug = require('../coverage/instrument/main')
 
 // Gets the errorStack module from the main file
 const errorStack = consoleDebug.errorStack
 
 describe('Exception Test Suite', () => {
+    it('Clears terminal', () => {
+        consoleDebug.clear()
+    })
+
     it('Verify a non-captured stack', () => {
         assert.throws(errorStack.getStack)
     })
@@ -100,9 +104,5 @@ describe('Exception Test Suite', () => {
         assert.throws(() => {
             consoleDebug.render.styleLoader.changeTheme('thisshouldnotexists1234')
         })
-    })
-
-    it('Clears terminal', () => {
-        consoleDebug.clear()
     })
 })

@@ -18,7 +18,7 @@ exports.clear = () => {
 exports.log = (firstArg) => {
     // for now just handle the first argument until this is solved.
     errorStack.capture()
-    render.console(firstArg)
+    render.console(firstArg, 'log')
 }
 
 // console.debug is a alias of console.log
@@ -26,22 +26,22 @@ exports.debug = exports.log
 
 exports.warn = (firstArg) => {
     errorStack.capture()
-    render.console(firstArg)
+    render.console(firstArg, 'warn')
 }
 
 exports.error = (firstArg) => {
     errorStack.capture()
-    render.console(firstArg)
+    render.console(firstArg, 'error')
 }
 
 exports.info = (firstArg) => {
     errorStack.capture()
-    render.console(firstArg)
+    render.console(firstArg, 'info')
 }
 
 exports.fatal = (firstArg) => {
     errorStack.catchExceptions()
-    throw new Error(firstArg)
+    throw new Error(firstArg, 'fatal')
 }
 
 exports.trace = () => {
