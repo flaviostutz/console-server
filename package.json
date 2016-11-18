@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "lint": "grunt lint",
-    "test": "grunt mocha",
+    "test": "grunt verifyCommit",
     "cover": "grunt istanbul",
     "verifyCommit": "grunt verifyCommit"
   },

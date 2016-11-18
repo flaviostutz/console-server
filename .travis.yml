@@ -7,4 +7,3 @@ node_js:
 os:
   - linux
   - osx
-after_script: grunt verifyCommit
