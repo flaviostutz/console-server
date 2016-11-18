@@ -39,3 +39,9 @@ If you really really really **really** want to submit a pull request but your co
 `git commit -n (or --no-verify)`
 
 *this is not recommended unless you have a good reason for it :)*
+
+### Shortcut
+You can always quickly access a test when typing `grunt` it will default to a `grunt verifyCommit` command
+
+### Watcher
+Executing `grunt dev` will execute `grunt verifyCommit` and then keep watching for file changes. When it has detected a file change it will re-run `grunt verifyCommit`

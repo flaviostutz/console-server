@@ -99,15 +99,26 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: '<%= instrument.files %>',
+                files: [
+                    '<%= instrument.files %>',
+                    'test/*.js'
+                ],
                 tasks: [
                     'verifyCommit',
                 ],
                 options: {
-                    spawn: false,
+                    spawn: true,
                 },
             },
         },
+        notify_hooks: {
+            options: {
+                enabled: true,
+                max_jshint_notifications: 1,
+                success: true,
+                duration: 1
+            }
+        }
     })
 
     grunt.loadNpmTasks('gruntify-eslint')
@@ -121,7 +132,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', 'verifyCommit')
 
-    grunt.registerTask('watch', ['verifyCommit', 'watch'])
+    grunt.registerTask('dev', ['clean', 'verifyCoverage', 'watch'])
     grunt.registerTask('lint', 'eslint')
     grunt.registerTask('mocha', [
         'instrument',
@@ -141,4 +152,5 @@ module.exports = function(grunt) {
     ])
 
     grunt.task.run('clean:pre')
+    grunt.task.run('notify_hooks')
 }

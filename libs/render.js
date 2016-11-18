@@ -73,8 +73,8 @@ exports.console = a => {
     let output  = ''
 
     for (let i = 0; i < stack.length; i++) {
-        if (stack[i].methodName === 'log' && stack[i].isFromConsoleDebug) {
-            const trace = stack[i - 1]
+        if (stack[i].methodName === 'capture' && stack[i].isFromConsoleDebug) {
+            const trace = stack[i - 2]
             const fileName = util.truncateFilePath(trace.fileName)
 
             const renderText = util.normalizeInput(a)

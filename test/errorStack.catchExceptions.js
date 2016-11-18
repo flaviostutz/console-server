@@ -33,8 +33,21 @@ describe('Exception Test Suite', () => {
         errorStack.catchExceptions()
     })
 
+    it('Should fatal error', () => {
+        assert.throws(() => {
+            consoleDebug.fatal('fatal')
+        })
+    })
+
+    it('Should console.trace', () => {
+        consoleDebug.trace()
+    })
+
     it('Should console.log', () => {
-        consoleDebug.log('hello!')
+        consoleDebug.log('log')
+        consoleDebug.warn('warn')
+        consoleDebug.error('error')
+        consoleDebug.info('info')
         consoleDebug.log('testing object display: ')
         consoleDebug.log({
             cool: 'object',
@@ -87,5 +100,9 @@ describe('Exception Test Suite', () => {
         assert.throws(() => {
             consoleDebug.render.styleLoader.changeTheme('thisshouldnotexists1234')
         })
+    })
+
+    it('Clears terminal', () => {
+        consoleDebug.clear()
     })
 })

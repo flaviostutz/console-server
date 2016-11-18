@@ -1,11 +1,16 @@
 'use strict'
 
 const errorStack = require('./libs/errorstack')
-const render   = require('./libs/render')
+const render     = require('./libs/render')
+const util       = require('./libs/util')
 
 // Expose some modules that libs depend on
 exports.errorStack = errorStack
-exports.render   = render
+exports.render     = render
+
+exports.clear = () => {
+    util.clearTerminal()
+}
 
 // TODO: how to get all friggin arguments?
 // ..args doesn't work
@@ -14,4 +19,32 @@ exports.log = (firstArg) => {
     // for now just handle the first argument until this is solved.
     errorStack.capture()
     render.console(firstArg)
+}
+
+// console.debug is a alias of console.log
+exports.debug = exports.log
+
+exports.warn = (firstArg) => {
+    errorStack.capture()
+    render.console(firstArg)
+}
+
+exports.error = (firstArg) => {
+    errorStack.capture()
+    render.console(firstArg)
+}
+
+exports.info = (firstArg) => {
+    errorStack.capture()
+    render.console(firstArg)
+}
+
+exports.fatal = (firstArg) => {
+    errorStack.catchExceptions()
+    throw new Error(firstArg)
+}
+
+exports.trace = () => {
+    errorStack.capture()
+    errorStack.renderStack(errorStack.getStack())
 }
