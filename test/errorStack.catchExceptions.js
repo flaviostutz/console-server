@@ -3,12 +3,16 @@
 // The goal of this test is to run all code and check for exceptions, not the integrity of the output itself.
 
 const assert       = require('assert-plus')
-const consoleDebug = require('../main')
+const consoleDebug = require('./coverage/instrument/main')
 
 // Gets the errorStack module from the main file
 const errorStack = consoleDebug.errorStack
 
 describe('Exception Test Suite', () => {
+    it('Verify a non-captured stack', () => {
+        assert.throws(errorStack.getStack)
+    })
+
     it('Captures errorStack', () => {
         assert.doesNotThrow(errorStack.capture)
     })
@@ -31,6 +35,40 @@ describe('Exception Test Suite', () => {
         })
     })
 
+    it('Catch exception', () => {
+        assert.doesNotThrow(errorStack.catchExceptions)
+    })
+
+    it('Should console.log', () => {
+        assert.doesNotThrow(() => {
+            consoleDebug.log('hello!')
+            consoleDebug.log('testing object display: ')
+            consoleDebug.log({
+                cool: 'object',
+                mate: {
+                    arrays: [
+                        'test1',
+                        'test2',
+                    ],
+                },
+                numbers: [
+                    1,
+                    2,
+                    3,
+                    4,
+                ],
+                null:    null,
+                integer: 5,
+                boolean: true,
+            })
+            consoleDebug.log('testing array display: ')
+            consoleDebug.log([
+                'test1',
+                'test2',
+            ])
+        })
+    })
+
     it('Sets a style', () => {
         assert.doesNotThrow(() => {
             consoleDebug.render.styleLoader.setStyle({
@@ -41,35 +79,27 @@ describe('Exception Test Suite', () => {
         })
     })
 
-    it('Catch exception', () => {
-        assert.doesNotThrow(errorStack.catchExceptions)
+    it('Verify a non console-debug stack', () => {
+        assert.throws(() => {
+            consoleDebug.errorStack.renderStack('thisshoulderror')
+        })
     })
 
-    it('Should console.log', () => {
-        consoleDebug.log('hello!')
-        consoleDebug.log('testing object display: ')
-        consoleDebug.log({
-            cool: 'object',
-            mate: {
-                arrays: [
-                    'test1',
-                    'test2',
-                ],
-            },
-            numbers: [
-                1,
-                2,
-                3,
-                4,
-            ],
-            null:    null,
-            integer: 5,
-            boolean: true,
+    it('Throw exception', () => {
+        assert.doesNotThrow(() => {
+            consoleDebug.errorStack.triggerException(new Error('test'))
         })
-        consoleDebug.log('testing array display: ')
-        consoleDebug.log([
-            'test1',
-            'test2',
-        ])
+    })
+
+    it('Changes a theme', () => {
+        assert.doesNotThrow(() => {
+            consoleDebug.render.styleLoader.changeTheme('red')
+        })
+    })
+
+    it('Changes a theme to a non existing theme', () => {
+        assert.throws(() => {
+            consoleDebug.render.styleLoader.changeTheme('thisshouldnotexists1234')
+        })
     })
 })

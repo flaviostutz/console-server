@@ -5,7 +5,7 @@ module.exports = {
     ul: {
         display: 'block',
         margin:  '0 0 0',
-        color:   'grey',
+        color:   'red',
     },
 
     li: {
@@ -15,27 +15,27 @@ module.exports = {
 
     exception: {
         background: 'red',
-        color:      'white',
+        color:      'red',
         marginLeft: '2',
     },
 
     exceptiontext: {
-        color:      'white',
+        color:      'red',
         marginLeft: '1',
     },
 
     filename: {
         marginLeft: '1',
-        color:      'bright-yellow',
+        color:      'red',
     },
 
     line: {
         marginRight: '1',
-        color:       'bright-yellow',
+        color:       'red',
     },
 
     function: {
-        color: 'white',
+        color: 'red',
     },
 
     subtext: {
@@ -60,29 +60,29 @@ module.exports = {
     },
 
     info: {
-        color: 'bright-magenta',
+        color: 'bright-red',
     },
 
     // Object styling
     object: {
         margin: '0 2 1',
-        color:  'grey',
+        color:  'red',
     },
 
     key: {
-        color:  'white',
+        color:  'red',
         margin: '0 0 0',
     },
 
     string: {
-        color: 'bright-green',
+        color: 'red',
     },
 
     number: {
-        color: 'magenta',
+        color: 'red',
     },
 
     boolean: {
-        color: 'magenta',
+        color: 'red',
     },
 }

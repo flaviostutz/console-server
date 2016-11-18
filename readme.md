@@ -16,7 +16,7 @@ Replace your console object with a more informative output display.
 ___
 # Features
 - [ ] Pretty error print
-- [ ] Filename and Linenumber display where it was executed
+- [ ] Filename and Linenumber display where logs where executed
 - [ ] Pretty array, object and json output
 - [ ] Smart truncation
 - [ ] Event emitters

@@ -24,17 +24,22 @@ exports.capture = () => {
 
 // Captures exceptions
 exports.catchExceptions = () => {
-    process.on('uncaughtException', err => {
-        exports.capturedError = err
-        exports.renderStack(exports.cleanStack(exports.parseError(err)))
-        process.exit(1)
-    })
+    process.on('uncaughtException', exports.triggerException)
+}
+
+exports.triggerException = err => {
+    exports.capturedError = err
+    exports.renderStack(exports.parseError(err))
 }
 
 // Renders a console-debug stacktrace visually with renderKid
 exports.renderStack = (stack) => {
     verifyIsConsoleDebugStack(stack)
 
+    // Pass the captured error to the render module
+    render.capturedError = exports.capturedError
+
+    // And render the stack
     render.stack(stack)
 }
 
@@ -126,7 +131,7 @@ const verifyIsConsoleDebugStack = stack => {
     }
 
     if (error) {
-        console.error('a non console-debug stacktrace object was used, something went horribly wrong.')
+        throw new Error('a non console-debug stacktrace object was used, something went horribly wrong.')
     }
 }
 

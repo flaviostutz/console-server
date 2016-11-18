@@ -8,6 +8,10 @@ const util        = require('./util')
 // Expose some modules that libs depend on
 exports.styleLoader = styleLoader
 
+// By default the capturedError is false
+exports.capturedError = false
+
+// How a the html is rendered by renderKid
 exports.html = html => {
     // Get the style again, because it might have changed
     const r = new RenderKid()
@@ -16,6 +20,7 @@ exports.html = html => {
     return r.render(html)
 }
 
+// How a console-debug stacktrace is rendered
 exports.stack = stack => {
     // A 'header' template. This is used for showing exceptions or other useful title messages
     let header = ''
@@ -23,8 +28,11 @@ exports.stack = stack => {
     // Show a error
     if (exports.capturedError) {
         header += `
-            <exception>Error</exception>:<exceptiontext>${exports.capturedError}</exceptiontext>
+            <exception>uncaughtException</exception>:<exceptiontext>${exports.capturedError}</exceptiontext>
         `
+
+        // Reset the capturedError because it was displayed
+        exports.capturedError = false
     }
 
     // Add the li 'traces'
@@ -72,12 +80,8 @@ exports.console = a => {
             const renderText = util.normalizeInput(a)
 
             output += `
-            <ul>
-                <li>
-                    - <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
-                    <subtext>${renderText}</subtext>
-                </li>
-            </ul>
+                <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
+                <consoletext>${renderText}</consoletext>
             `
         }
     }

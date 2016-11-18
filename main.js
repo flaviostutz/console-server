@@ -9,7 +9,7 @@ exports.render   = render
 
 // TODO: how to get all friggin arguments?
 // ..args doesn't work
-// and arugments returns a bunch of useless stuff :c
+// and arguments returns a bunch of useless stuff :c
 exports.log = (firstArg) => {
     // for now just handle the first argument until this is solved.
     errorStack.capture()

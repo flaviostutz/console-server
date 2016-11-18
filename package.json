@@ -4,18 +4,17 @@
   "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
   "main": "main.js",
   "scripts": {
-    "lint": "node ./node_modules/eslint/bin/eslint.js --config ./.eslintrc --ext .js src ./**/*.js",
-    "test": "mocha",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+    "lint": "grunt lint",
+    "test": "grunt mocha",
+    "cover": "grunt istanbul",
+    "verifyCommit": "grunt verifyCommit"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/michaeldegroot/console-debug"
   },
   "pre-commit": [
-    "lint",
-    "test",
-    "cover"
+    "verifyCommit"
   ],
   "keywords": [
     "debug",
@@ -39,15 +38,22 @@
     "assert-plus": "^1.0.0",
     "coveralls": "^2.11.15",
     "eslint": "^3.10.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-istanbul": "^0.7.1",
+    "grunt-istanbul-coverage": "^0.1.4",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-notify": "^0.4.5",
+    "grunt-passfail": "^0.1.2",
+    "gruntify-eslint": "^3.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "mocha-lcov-reporter": "^1.2.0",
-    "istanbul": "^0.4.5",
-    "package-script": "^0.0.8",
     "pre-commit": "^1.1.3"
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
+    "grunt-contrib-watch": "^1.0.0",
     "renderkid": "^2.0.0",
     "stack-trace": "^0.0.9"
   }
