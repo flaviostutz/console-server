@@ -76,6 +76,10 @@ describe('Exception Test Suite', () => {
             'test1',
             'test2',
         ])
+        consoleDebug.log(() => {
+            return 'test'
+        })
+        consoleDebug.log(/ab+c/)
     })
 
     it('Sets a style', () => {

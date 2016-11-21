@@ -69,9 +69,8 @@ module.exports = {
         color:  'grey',
     },
 
-    key: {
-        color:  'white',
-        margin: '0 0 0',
+    regexp: {
+        color: 'magenta',
     },
 
     string: {

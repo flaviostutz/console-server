@@ -1,9 +1,11 @@
 'use strict'
 
-const RenderKid   = require('renderkid')
-const styleLoader = require('../styles/loader')
-const errorStack  = require('./errorstack')
-const util        = require('./util')
+const RenderKid         = require('renderkid')
+const prettyFormat      = require('pretty-format')
+const styleLoader       = require('../styles/loader')
+const errorStack        = require('./errorstack')
+const util              = require('./util')
+const renderTypes       = require('./renderType')
 
 // Expose some modules that libs depend on
 exports.styleLoader = styleLoader
@@ -81,8 +83,12 @@ exports.console = (msg, type) => {
             // Truncate long filepaths
             const fileName = util.truncateFilePath(trace.fileName)
 
-            // And normalize the input
-            const renderText = util.normalizeInput(msg)
+            // Put the content through prettyFormat plugins
+            const renderText = prettyFormat(msg, {
+                plugins: [
+                    renderTypes.type,
+                ],
+            })
 
             output += `
                 <${type}>${type}</${type}><filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
