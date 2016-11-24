@@ -13,7 +13,7 @@ describe('Exception Test Suite', () => {
         consoleDebug.setup({
             silent:    false,
             colors:    false,
-            renderKid: true,
+            renderKid: false,
         })
     })
 
