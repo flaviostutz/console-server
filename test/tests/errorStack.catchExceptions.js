@@ -9,6 +9,14 @@ const consoleDebug = require('../coverage/instrument/main')
 const errorStack = consoleDebug.errorStack
 
 describe('Exception Test Suite', () => {
+    it('Setup console-debug', () => {
+        consoleDebug.setup({
+            silent:    false,
+            colors:    true,
+            renderKid: true,
+        })
+    })
+
     it('Clears terminal', () => {
         consoleDebug.clear()
     })

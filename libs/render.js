@@ -39,8 +39,8 @@ exports.html = html => {
         r.style(styleLoader.getStyle())
 
         if (main.settings.colors === false) {
-            r = new RenderKid()
-            r.style(styleLoader.removeColors(styleLoader.getStyle()))
+            // r = new RenderKid()
+            // r.style(styleLoader.removeColors(styleLoader.getStyle()))
         }
 
         output = r.render(html)
