@@ -12,7 +12,7 @@ describe('Exception Test Suite', () => {
     it('Setup console-debug', () => {
         consoleDebug.setup({
             silent:    false,
-            colors:    true,
+            colors:    false,
             renderKid: true,
         })
     })
@@ -118,15 +118,6 @@ describe('Exception Test Suite', () => {
         })
     })
 
-    it('No colors', () => {
-        consoleDebug.setup({
-            silent:    false,
-            colors:    false,
-            renderKid: true,
-        })
-        consoleDebug.log('log')
-    })
-
     it('No renderkid', () => {
         consoleDebug.setup({
             silent:    false,
@@ -144,4 +135,13 @@ describe('Exception Test Suite', () => {
         })
         consoleDebug.log('log')
     })
+
+    // it('No colors', () => {
+    //     consoleDebug.setup({
+    //         silent:    false,
+    //         colors:    false,
+    //         renderKid: true,
+    //     })
+    //     consoleDebug.log('log')
+    // })
 })
