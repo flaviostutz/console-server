@@ -1,11 +1,11 @@
 'use strict'
 
-const RenderKid         = require('renderkid')
-const prettyFormat      = require('pretty-format')
-const styleLoader       = require('../styles/loader')
-const errorStack        = require('./errorstack')
-const util              = require('./util')
-const renderTypes       = require('./renderType')
+const prettyFormat = require('pretty-format')
+const styleLoader  = require('../styles/loader')
+const errorStack   = require('./errorstack')
+const util         = require('./util')
+const typeDetect   = require('type-detect')
+const main         = require('../main')
 
 // Expose some modules that libs depend on
 exports.styleLoader = styleLoader
@@ -13,13 +13,40 @@ exports.styleLoader = styleLoader
 // By default the capturedError is false (a module is supposed to set this value for exports.stack header)
 exports.capturedError = false
 
-// How a the html is rendered by renderKid
+// How html is printed to console
 exports.html = html => {
-    // Get the style again, because it might have changed
-    const r = new RenderKid()
-    r.style(styleLoader.getStyle())
+    if (main.settings.silent === true) {
+        return
+    }
+    let output = ''
 
-    return r.render(html)
+    if (main.settings.renderKid === false) {
+        const stripTags = require('striptags')
+        const trim      = require('trim')
+
+        const newlines = html.split('\n')
+        const newHtml  = []
+        newlines.forEach(klappa => {
+            newHtml.push(trim(stripTags(klappa)))
+        })
+
+        output = newHtml.join('\n')
+    } else {
+        const RenderKid = require('renderkid')
+
+        // Get the style again, because it might have changed
+        let r = new RenderKid()
+        r.style(styleLoader.getStyle())
+
+        if (main.settings.colors === false) {
+            r = new RenderKid()
+            r.style(styleLoader.removeColors(styleLoader.getStyle()))
+        }
+
+        output = r.render(html)
+    }
+
+    console.log(output)
 }
 
 // How a console-debug stacktrace is rendered
@@ -67,7 +94,8 @@ exports.stack = stack => {
             </li>
         </ul>
     `
-    console.log(exports.html(output))
+
+    exports.html(output)
 }
 
 exports.console = (msg, type) => {
@@ -86,16 +114,27 @@ exports.console = (msg, type) => {
             // Put the content through prettyFormat plugins
             const renderText = prettyFormat(msg, {
                 plugins: [
-                    renderTypes.type,
+                    {
+                        test(val) {
+                            // NOTE: can a typeDetect fail? I geuss not :)
+                            return typeDetect(val) !== false
+                        },
+                        print(val, print, indent) {
+                            const type = typeDetect(val).toLowerCase()
+
+                            // Encapsulate the value with a html tag being the type of the variable itself
+                            return `<${type}>${val}</${type}>`
+                        },
+                    },
                 ],
             })
 
             output += `
-                <${type}>${type}</${type}><filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
+                <${type}>${type}</${type}> <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
                 <consoletext>${renderText}</consoletext>
             `
         }
     }
 
-    console.log(exports.html(output))
+    exports.html(output)
 }

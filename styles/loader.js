@@ -1,5 +1,7 @@
 'use strict'
 
+const util = require('../libs/util')
+
 // The availible styles
 const styles = {
     default: require('./src/default'),
@@ -23,4 +25,11 @@ exports.setStyle = newStyle => {
 
 exports.getStyle = () => {
     return style
+}
+
+exports.removeColors = newStyle => {
+    return util.omitDeep(newStyle, [
+        'color',
+        'background',
+    ])
 }

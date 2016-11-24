@@ -2,7 +2,7 @@
 
 const stackTrace = require('stack-trace')
 const path       = require('path')
-const render   = require('./render')
+const render     = require('./render')
 const util       = require('./util')
 
 const projectRoot = util.resolveProjectRoot()

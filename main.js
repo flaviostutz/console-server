@@ -3,10 +3,19 @@
 const errorStack = require('./libs/errorstack')
 const render     = require('./libs/render')
 const util       = require('./libs/util')
+const _          = require('lodash')
+
+// Default settings
+const defaultSettings = {
+    silent:    false,
+    colors:    true,
+    renderKid: false,
+}
 
 // Expose some modules that libs depend on
 exports.errorStack = errorStack
 exports.render     = render
+exports.settings   = defaultSettings
 
 exports.clear = () => {
     util.clearTerminal()
@@ -47,4 +56,8 @@ exports.fatal = (firstArg) => {
 exports.trace = () => {
     errorStack.capture()
     errorStack.renderStack(errorStack.getStack())
+}
+
+exports.setup = addedSettings => {
+    exports.settings = _.merge(defaultSettings, addedSettings)
 }

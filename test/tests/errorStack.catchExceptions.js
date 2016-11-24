@@ -109,4 +109,31 @@ describe('Exception Test Suite', () => {
             consoleDebug.render.styleLoader.changeTheme('thisshouldnotexists1234')
         })
     })
+
+    it('No colors', () => {
+        consoleDebug.setup({
+            silent:    false,
+            colors:    false,
+            renderKid: true,
+        })
+        consoleDebug.log('log')
+    })
+
+    it('No renderkid', () => {
+        consoleDebug.setup({
+            silent:    false,
+            colors:    false,
+            renderKid: false,
+        })
+        consoleDebug.log('log')
+    })
+
+    it('Silent', () => {
+        consoleDebug.setup({
+            silent:    true,
+            colors:    false,
+            renderKid: false,
+        })
+        consoleDebug.log('log')
+    })
 })
