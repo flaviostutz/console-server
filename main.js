@@ -17,6 +17,12 @@ exports.errorStack = errorStack
 exports.render     = render
 exports.settings   = defaultSettings
 
+exports.logToFile = (path) => {
+    exports.settings.file = {
+        path,
+    }
+}
+
 exports.clear = () => {
     util.clearTerminal()
 }
@@ -56,6 +62,10 @@ exports.fatal = (firstArg) => {
 exports.trace = () => {
     errorStack.capture()
     errorStack.renderStack(errorStack.getStack())
+}
+
+exports.catchExceptions = () => {
+    errorStack.catchExceptions()
 }
 
 exports.setup = addedSettings => {

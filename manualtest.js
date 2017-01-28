@@ -12,11 +12,10 @@ console.setup({
     colors:    true,
     renderKid: true,
 })
-console.setup({
-    silent:    false,
-    colors:    true,
-    renderKid: true,
-})
+
+console.catchExceptions()
+
+// console.logToFile('testfile.log')
 
 console.log('hia')
 console.warn('hia')
@@ -28,4 +27,5 @@ console.log(() => {
 })
 console.log(/ab+c/)
 console.trace()
-console.fatal('oops, fake fatal error!')
+// console.fatal('oops, fake fatal error!')
+throw new Error('oops, fake fatal error!')

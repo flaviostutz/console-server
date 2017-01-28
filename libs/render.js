@@ -6,6 +6,13 @@ const errorStack   = require('./errorstack')
 const util         = require('./util')
 const typeDetect   = require('type-detect')
 const main         = require('../main')
+const fs           = require('fs')
+const path         = require('path')
+const mkdirp       = require('mkdirp')
+const stripTags    = require('striptags')
+const trim         = require('trim')
+const RenderKid    = require('renderkid')
+const os           = require('os')
 
 // Expose some modules that libs depend on
 exports.styleLoader = styleLoader
@@ -21,19 +28,14 @@ exports.html = html => {
     let output = ''
 
     if (main.settings.renderKid === false) {
-        const stripTags = require('striptags')
-        const trim      = require('trim')
-
         const newlines = html.split('\n')
         const newHtml  = []
-        newlines.forEach(klappa => {
-            newHtml.push(trim(stripTags(klappa)))
+        newlines.forEach(line => {
+            newHtml.push(trim(stripTags(line)))
         })
 
         output = newHtml.join('\n')
     } else {
-        const RenderKid = require('renderkid')
-
         // Get the style again, because it might have changed
         let r = new RenderKid()
         r.style(styleLoader.getStyle())
@@ -46,7 +48,31 @@ exports.html = html => {
         output = r.render(html)
     }
 
-    console.log(output)
+    if (main.settings.hasOwnProperty('file')) {
+        if (main.settings.file.hasOwnProperty('path')) {
+            output = false
+            mkdirp(path.dirname(main.settings.file.path), err => {
+                if (err) {
+                    throw new Error(err)
+                }
+                const writeStream = fs.createWriteStream(main.settings.file.path, {
+                    'flags': 'a',
+                })
+                const newlines = html.split('\n')
+                const newHtml  = []
+                newlines.forEach(line => {
+                    newHtml.push(trim(stripTags(line)))
+                })
+
+                writeStream.write(newHtml.join('\n') + os.EOL)
+                writeStream.end()
+            })
+        }
+    }
+
+    if (output) {
+        console.log(output)
+    }
 }
 
 // How a console-debug stacktrace is rendered
@@ -128,9 +154,9 @@ exports.console = (msg, type) => {
                     },
                 ],
             })
-
+            const typePadded = `<${type}>` + util.rightPad(type, 5, '.') + `</${type}>`
             output += `
-                <${type}>${type}</${type}> <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
+                ${typePadded} <filename>${fileName}</filename>:<line>${trace.lineNumber}</line>
                 <consoletext>${renderText}</consoletext>
             `
         }

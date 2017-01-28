@@ -22,7 +22,7 @@ ___
 - [ ] Event emitters
 - [ ] Optional timezone configuration
 - [X] Coloring of output
-- [ ] log stdout to file
+- [x] log stdout to file
 - [ ] quiet flag for turning messages on/off
 
 ___

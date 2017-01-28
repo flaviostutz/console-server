@@ -136,12 +136,13 @@ describe('Exception Test Suite', () => {
         consoleDebug.log('log')
     })
 
-    // it('No colors', () => {
-    //     consoleDebug.setup({
-    //         silent:    false,
-    //         colors:    false,
-    //         renderKid: true,
-    //     })
-    //     consoleDebug.log('log')
-    // })
+    // This errors travis?
+    it('No colors', () => {
+        consoleDebug.setup({
+            silent:    false,
+            colors:    false,
+            renderKid: true,
+        })
+        consoleDebug.log('log')
+    })
 })
