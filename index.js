@@ -1,9 +1,6 @@
 const Debug = require('./debug.js');
 var tty = require('tty');
 
-console.log('@@@@@ ' + process.env.LOGGER_LEVEL);
-console.log('***** ' + process.env.LOGGER_USE_COLORS);
-
 let useColors = tty.isatty(process.stdout.fd);
 
 const envUseColors = process.env.LOGGER_USE_COLORS;

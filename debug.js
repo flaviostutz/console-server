@@ -33,8 +33,6 @@ var Debug = function(_options) {
     }
   }
   this.options.leveln = this.numberFromLevel(this.options.level.trim());
-  console.log('>>>>>>>');
-  console.log(this.options)
 }
 
 Debug.prototype.get_file_parent = function() {
