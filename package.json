@@ -1,8 +1,8 @@
 {
-  "name": "console-debug",
-  "version": "0.4.2",
+  "name": "console-server",
+  "version": "1.0.0",
   "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
-  "main": "debug.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/michaeldegroot/console-debug"
+    "url": "https://github.com/flaviostutz/console-server"
   },
   "keywords": [
     "debug",

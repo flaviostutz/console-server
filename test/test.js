@@ -14,10 +14,8 @@ rimraf(logDir, function(result) {
 })
 
 var consoleObject = new Debug({
-  consoleFilter: [],
-  logToFile:     true,
-  logFilter:     [],
-  colors:        true,
+  filter: null,
+  colors: true,
 })
 
 describe('Stack getters', function() {
@@ -87,44 +85,26 @@ describe('Console object', function() {
 
   it('Log function without colors', function() {
     var consoleObject = new Debug({
-      consoleFilter: [],
-      logToFile: true,
-      logFilter: [],
+      filter: null,
       colors: false
     })
     assert.equal(consoleObject.trace('test', 'LOG', true), 'test')
   })
 
-  it('Log function with a filter', function() {
+  it('Log function with a filter skipping', function() {
     var consoleObject = new Debug({
-      consoleFilter: ['LOG'],
-      logToFile: true,
-      logFilter: [],
-      colors: false,
+      filter: 'info',
+      colors: false
     })
     assert.equal(consoleObject.trace('test', 'LOG', true), true)
   })
-})
 
-
-describe('Log to file', function() {
-  it('Log to file while logFilter is set to LOG', function() {
+  it('Log function with a filter not skipping', function () {
     var consoleObject = new Debug({
-      consoleFilter: [],
-      logToFile: true,
-      logFilter: ['LOG'],
-      colors: false,
+      filter: 'info',
+      colors: false
     })
-    assert.doesNotThrow(function() {
-      consoleObject.logFile('test', 'LOG', function(result) {
-      })
-    }, Error)
-  })
-
-  it('Log to file', function(done) {
-    consoleObject.logFile('test', 'test', function(result) {
-      assert.equal(result, true)
-      done()
-    })
+    assert.equal(consoleObject.trace('test', 'info', true), 'test')
   })
 })
+

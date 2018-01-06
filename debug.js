@@ -11,17 +11,22 @@ var info = clc.cyanBright.bold
 
 var rootDir = __dirname
 var logDir = path.join(rootDir, 'logs')
-var logToFile = false
 var noLogsFolder = false
-var colors = true
-var consoleFilter = new Array
-var logFilter = new Array
+var options = {
+  filter: null,
+  colors: true
+}
 
-var Debug = function(set) {
-  consoleFilter = set['consoleFilter']
-  logFilter = set['logFilter']
-  logToFile = set['logToFile']
-  colors = set['colors']
+var Debug = function(_options) {
+  if(_options!=null) {
+    options = Object.assign(options,_options);
+  }
+  if (!options.filter || options.filter=='') {
+    options.filter = null;
+  }
+  if (!options.colors) {
+    options.colors = true;
+  }
 }
 
 Debug.prototype.get_file_parent = function() {
@@ -76,7 +81,7 @@ Debug.prototype.get_line_parent = function() {
 
 Debug.prototype.trace = function(msg, type, test) {
   var completeMessage = ''
-  var format = rightpad(dateFormat(new Date(), 'HH:MM:ss'), 9)
+  var format = new Date().toISOString() + ' '
   var appDir = path.dirname(require.main.filename)
 
   var sepArray = appDir.split(path.sep)
@@ -94,64 +99,30 @@ Debug.prototype.trace = function(msg, type, test) {
     }
   }
 
-  if (colors)
-    typeF = rightpad(eval(type.toLowerCase() + '(type)'), 26)
-  if (!colors)
-    typeF = type
+  if (options.colors)
+    typeF = rightpad(eval(type.toLowerCase() + '(type)'), 25)
+  if (!options.colors)
+    typeF = rightpad(type.toUpperCase(), 6)
 
 
-  for (i = 0; i < consoleFilter.length; i++) {
-    if (type == consoleFilter[i])
-      return true
+  if (options.filter && options.filter.toLowerCase().indexOf(type.toLowerCase())==-1) {
+    return true;
   }
 
-  func = rightpad(func, 30)
+  func = rightpad(func, 30) + ' '
   completeMessage  = completeMessage   +   format  +  typeF  +   func  +  msg
-  logMessage = format  +  typeF  +   func  +  msg
 
   if (typeof(msg) == 'object') {
     console.log(format  +  typeF  +  func)
     try {
-      completeMessage = JSON.stringify(msg, null, 4)
-      logMessage = format  +  typeF  +   func  +  '\n'  +  completeMessage
+      completeMessage = util.inspect(msg);
     } catch (e) {
       completeMessage = msg
-      logMessage = format  +  typeF  +   func  +  msg
     }
   }
 
   console.log(completeMessage)
-  if (logToFile)
-    this.logFile(logMessage, type)
   return msg
-}
-
-Debug.prototype.logFile = function(msg, type, cb) {
-  if (!cb)
-    cb = false
-  for (i = 0; i < logFilter.length; i++) {
-    if (type == logFilter[i])
-      if (cb)
-        cb(true)
-  }
-
-  fs.appendFile(path.join(logDir, dateFormat(new Date(), 'dd-mm-yyyy')  +  ' - ' + type) + '.txt', msg + '\n', function(err) {
-    if (err) {
-      if (!fs.existsSync(logDir) && !noLogsFolder) {
-        console.error(error('no logs folder found (or no access) in ' + rootDir + '. Trying to creating a logs folder at '  +  logDir))
-        fs.mkdir(logDir, 0755, function(e) {
-          if (e)
-            throw new Error(e)
-          console.log('logs folder created, the next logs will be saved to file.')
-          if (cb)
-            cb(true)
-        })
-      }
-    } else {
-      if (cb)
-        cb(true)
-    }
-  })
 }
 
 Debug.prototype.log = function(msg, test) {
