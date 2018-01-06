@@ -1,7 +1,7 @@
 {
   "name": "console-server",
-  "version": "1.0.0",
-  "description": "Replaces the console object with a more stylish and practical way of displaying messages.",
+  "version": "1.0.1",
+  "description": "This logging module was created to simplify logging by employing good features with no configuration needed.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -20,8 +20,8 @@
     "output"
   ],
   "author": {
-    "name": "Michael de Groot",
-    "email": "specamps@gmail.com"
+    "name": "Flávio Stutz (inspired on work from Michael de Groot)",
+    "email": "flaviostutz@gmail.com"
   },
   "dependencies": {
     "cli-color": ">= 0.2.3",
