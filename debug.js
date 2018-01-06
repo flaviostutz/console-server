@@ -86,11 +86,9 @@ Debug.prototype.get_line_parent = function() {
 }
 
 Debug.prototype.trace = function(msg, type) {
-  console.log('>>>>> ' + msg);
   if (!type) {
     type = 'debug';
   }
-  var completeMessage = ''
   var format = new Date().toISOString() + ' '
   if (this.options.colors) {
     format = eval(type.toLowerCase() + '(format)')
@@ -130,7 +128,7 @@ Debug.prototype.trace = function(msg, type) {
 
   let msg0 = msg;
   if (typeof (msg) == 'object') {
-    console.log(format + typeF + func)
+    // console.log(format + typeF + func)
     try {
       msg0 = '\n' + util.inspect(msg);
     } catch (e) {
@@ -138,8 +136,7 @@ Debug.prototype.trace = function(msg, type) {
     }
   }
   
-  completeMessage  = completeMessage   +   format  +  typeF  +   func  +  msg0
-
+  var completeMessage  = format  +  typeF  +   func  +  msg0
   console.log(completeMessage)
   return true
 }
