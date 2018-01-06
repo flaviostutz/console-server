@@ -124,7 +124,7 @@ Debug.prototype.trace = function(msg, type) {
       return false;
   }
 
-  func = rightpad(func, 30) + ' '
+  func = rightpad(func, 24) + ' '
 
   let msg0 = msg;
   if (typeof (msg) == 'object') {
