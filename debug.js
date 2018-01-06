@@ -3,6 +3,7 @@ var clc = require('cli-color')
 var path = require('path')
 var dateFormat = require('dateformat')
 var rightpad = require('right-pad')
+var util = require('util');
 var error = clc.red.bold
 var debug = clc.white.bold
 var log = clc.white.bold
@@ -12,21 +13,28 @@ var info = clc.cyanBright.bold
 var rootDir = __dirname
 var logDir = path.join(rootDir, 'logs')
 var noLogsFolder = false
-var options = {
-  filter: null,
-  colors: true
-}
+
+const DEBUG = 5;
+const INFO = 4;
+const WARN = 3;
+const ERROR = 2;
 
 var Debug = function(_options) {
+  this.options = {
+    level: 'all',
+    colors: true
+  }
   if(_options!=null) {
-    options = Object.assign(options,_options);
+    if (_options.level!=null && _options.level != '') {
+      this.options.level = _options.level
+    }
+    if (_options.colors != null && (_options.colors + '') != '') {
+      this.options.colors = _options.colors
+    }
   }
-  if (!options.filter || options.filter=='') {
-    options.filter = null;
-  }
-  if (!options.colors) {
-    options.colors = true;
-  }
+  this.options.leveln = this.numberFromLevel(this.options.level.trim());
+  console.log('>>>>>>>');
+  console.log(this.options)
 }
 
 Debug.prototype.get_file_parent = function() {
@@ -79,9 +87,17 @@ Debug.prototype.get_line_parent = function() {
   }
 }
 
-Debug.prototype.trace = function(msg, type, test) {
+Debug.prototype.trace = function(msg, type) {
+  console.log('>>>>> ' + msg);
+  if (!type) {
+    type = 'debug';
+  }
   var completeMessage = ''
   var format = new Date().toISOString() + ' '
+  if (this.options.colors) {
+    format = eval(type.toLowerCase() + '(format)')
+  }
+
   var appDir = path.dirname(require.main.filename)
 
   var sepArray = appDir.split(path.sep)
@@ -99,55 +115,68 @@ Debug.prototype.trace = function(msg, type, test) {
     }
   }
 
-  if (options.colors)
-    typeF = rightpad(eval(type.toLowerCase() + '(type)'), 25)
-  if (!options.colors)
+  if (this.options.colors) {
+    typeF = rightpad(eval(type.toLowerCase() + '(type.toUpperCase())'), 25)
+  } else {
     typeF = rightpad(type.toUpperCase(), 6)
+  }
 
 
-  if (options.filter && options.filter.toLowerCase().indexOf(type.toLowerCase())==-1) {
-    return true;
+  //verify log level configuration
+  const leveln = this.numberFromLevel(type);
+  if (leveln > this.options.leveln) {
+      return false;
   }
 
   func = rightpad(func, 30) + ' '
-  completeMessage  = completeMessage   +   format  +  typeF  +   func  +  msg
 
-  if (typeof(msg) == 'object') {
-    console.log(format  +  typeF  +  func)
+  let msg0 = msg;
+  if (typeof (msg) == 'object') {
+    console.log(format + typeF + func)
     try {
-      completeMessage = util.inspect(msg);
+      msg0 = '\n' + util.inspect(msg);
     } catch (e) {
-      completeMessage = msg
+      //dont do anything
     }
   }
+  
+  completeMessage  = completeMessage   +   format  +  typeF  +   func  +  msg0
 
   console.log(completeMessage)
-  return msg
-}
-
-Debug.prototype.log = function(msg, test) {
-  this.trace(msg, 'LOG', test)
   return true
 }
 
-Debug.prototype.debug = function(msg, test) {
-  this.trace(msg, 'DEBUG', test)
-  return true
+Debug.prototype.log = function() {
+  return this.trace(util.format.apply(util, arguments), 'LOG')
 }
 
-Debug.prototype.warn = function(msg, test) {
-  this.trace(msg, 'WARN', test)
-  return true
+Debug.prototype.debug = function() {
+  return this.trace(util.format.apply(util, arguments), 'DEBUG')
 }
 
-Debug.prototype.info = function(msg, test) {
-  this.trace(msg, 'INFO', test)
-  return true
+Debug.prototype.warn = function() {
+  return this.trace(util.format.apply(util, arguments), 'WARN')
 }
 
-Debug.prototype.error = function(msg, test) {
-  this.trace(msg, 'ERROR', test)
-  return true
+Debug.prototype.info = function() {
+  return this.trace(util.format.apply(util, arguments), 'INFO')
+}
+
+Debug.prototype.error = function() {
+  return this.trace(util.format.apply(util, arguments), 'ERROR')
+}
+
+Debug.prototype.numberFromLevel = function(level) {
+  level = level.toLowerCase();
+  if (level == 'debug' || level == 'all') {
+    return DEBUG;
+  } else if (level == 'info') {
+    return  INFO;
+  } else if (level == 'warn') {
+    return  WARN;
+  } else if (level == 'error') {
+    return  ERROR;
+  }
 }
 
 module.exports = Debug

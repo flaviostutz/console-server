@@ -1,61 +1,53 @@
-[![](https://nodei.co/npm/console-debug.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/console-debug)   
-[![](https://david-dm.org/michaeldegroot/console-debug.svg "deps") ](https://david-dm.org/michaeldegroot/console-debug "david-dm")
-[![](https://travis-ci.org/michaeldegroot/console-debug.svg?branch=master "testing") ](https://travis-ci.org/michaeldegroot/console-debug "travis-ci")
-[![](https://coveralls.io/repos/michaeldegroot/console-debug/badge.svg?branch=master&service=github)](https://coveralls.io/github/michaeldegroot/console-debug?branch=master)
-![](https://img.shields.io/badge/Node-%3E%3D4.0-green.svg)
-![](https://img.shields.io/npm/dt/console-debug.svg)
-![](https://img.shields.io/npm/l/console-debug.svg)
+# console-server
+Inpired on the great 'debug' module and derived from 'console-debug' module. This logging module was created to simplify logging by employing good features with no configuration needed.
 
+## Features
 
-___
-# What it does
-Replaces your console object with a more stylish and practical way of displaying notices,warn,info,debug,log and errors.  
-It automagically shows you the line number and filename where the command was executed, along with a timestamp.  
-There is also the ability to catch uncaughtExceptions, disable the output colors, and log to file.  
-You can also setup filters if you want to hide certain debug message types.  
+```
+const logger = require('console-server');
+logger.info('test one!');
+```
 
-![DEMO](http://i.imgur.com/fEVquh4.gif)
-___
-# Changelog
-[https://github.com/michaeldegroot/console-debug/commits/master](https://github.com/michaeldegroot/console-debug/commits/master)
-___
-#  Getting Started
+* Use .debug(), .info(), .warn() and .error() for passing contents to be logged
+* Formatters and raw objects can be used, just like with the default 'console'
+ 
+```
+logger.info('using', {name:'stutz'})
+//using {name: 'stutz'}
+```
 
-##### 1. Start by installing the package:
-    npm install console-debug
+ ```
+ logger.debug('%s is its name', 'cariota')
+ //cariota is its name
+ ```
 
-##### 2. Load the code
-```js
-var Debug = require('console-debug')
+* You can pass objects as log arguments
 
-var console = new Debug({
-	uncaughtExceptionCatch: false,                   // Do we want to catch uncaughtExceptions?
-	consoleFilter:          ['LOG', 'WARN'],         // Filter these console output types
-	logToFile:              true,                    // if true, will put console output in a log file folder called 'logs'
-	logFilter:              ['LOG','DEBUG','INFO'],  // Examples: Filter these types to not log to file
-	colors:                 true                     // do we want pretty pony colors in our console output?
-})
-````
+ ```
+ let obj = {title:'chief'};
+ logger.debug(obj)
+ //{title:'chief'} 
+ ```
 
+* Colors are enabled by default if process is open on a terminal (tty) and disabled otherwise. To force colors enabled/disabled, set environment property ```LOGGER_USE_COLORS='false'```
 
+* Log level is 'DEBUG' by default. To force log level, set environment property ```LOGGER_LEVEL``` to the desired log level. 
+ * ```LOGGER_LEVEL=info``` (enables info, warn and error) or  
+ * ```LOGGER_LEVEL=warn``` (enables only warn and error)
 
+## Usage examples
+```
+const console = require('console-server');
 
-##### 3. Do awesome stuff!
-```js
-console.log("I am a log!")
-console.warn("I am a warn!")
-console.error("I am a error!")
-console.debug("I am a debug!")
-console.info("I am a info!")
+console.debug('oh, my');
 
-// can also display objects
-obj = {
-	test1: [1,2,3,4],
-	test3: ["ohai","there"],
-	test4: true
-}
-console.log(obj)
-````
-___
-# Contact
-You can contact me at specamps@gmail.com
+console.info('just some information from our fellows...');
+
+console.warn('there is a clif just a few steps fr...');
+
+console.error('we couldn\'t advise that poor guy along the clif in time...');
+```
+
+Output:
+
+![demo1](demo1.png "Demo output")

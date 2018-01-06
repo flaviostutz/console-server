@@ -4,17 +4,16 @@ var assert = require('assert')
 var assert = require('assert-plus')
 var path   = require('path')
 var fs     = require('fs')
-var rimraf = require('rimraf')
 var Debug  = require('../debug')
 
-var logDir = path.join(__dirname, '..', 'logs')
-
-rimraf(logDir, function(result) {
-  console.log(result)
-})
+const console = require('../index.js');
+console.debug('oh, my');
+console.info('just some information from our fellows...');
+console.warn('there is a clif just a few steps fr...');
+console.error('we couldn\'t advise that poor guy along the clif in time...');
 
 var consoleObject = new Debug({
-  filter: null,
+  level: null,
   colors: true,
 })
 
@@ -40,11 +39,11 @@ describe('Stack getters', function() {
 
 describe('Internal functions', function() {
   it('Displaying a object', function() {
-    assert.object(consoleObject.trace({
+    assert(consoleObject.trace({
       test1: [1, 2, 3, 4],
       test2: ['ohai', 'there'],
       test3:true
-    }, 'LOG', true))
+    }, 'debug'))
   })
 
   it('Trigger a uncaught exception', function() {
@@ -56,27 +55,27 @@ describe('Internal functions', function() {
 
 describe('Console object', function() {
   it('Log function', function() {
-    assert.equal(consoleObject.log('test', 'LOG', true), true)
+    assert(consoleObject.log('test'))
   })
 
   it('Warn function', function() {
-    assert.equal(consoleObject.warn('test', 'WARN', true), true)
+    assert(consoleObject.warn('test'))
   })
 
   it('Error function', function() {
-    assert.equal(consoleObject.error('test', 'ERROR', true), true)
+    assert(consoleObject.error('test'))
   })
 
   it('Debug function', function() {
-    assert.equal(consoleObject.debug('test', 'DEBUG', true), true)
+    assert(consoleObject.debug('test'))
   })
 
   it('Info function', function() {
-    assert.equal(consoleObject.info('test', 'INFO', true), true)
+    assert(consoleObject.info('test'))
   })
 
   it('Displaying a object', function() {
-    assert.object(consoleObject.trace({
+    assert(consoleObject.trace({
       test1: [1, 2, 3, 4],
       test2: ['ohai', 'there'],
       test3: true,
@@ -85,26 +84,100 @@ describe('Console object', function() {
 
   it('Log function without colors', function() {
     var consoleObject = new Debug({
-      filter: null,
+      level: null,
       colors: false
     })
-    assert.equal(consoleObject.trace('test', 'LOG', true), 'test')
+    assert.equal(consoleObject.trace('test', 'DEBUG'), true)
   })
 
   it('Log function with a filter skipping', function() {
     var consoleObject = new Debug({
-      filter: 'info',
+      level: 'error',
       colors: false
     })
-    assert.equal(consoleObject.trace('test', 'LOG', true), true)
+    assert.equal(consoleObject.trace('test', 'info'), false)
   })
 
-  it('Log function with a filter not skipping', function () {
+  it('Log function with level DEBUG', function () {
     var consoleObject = new Debug({
-      filter: 'info',
+      level: 'debug',
+      colors: true
+    })
+    assert(consoleObject.trace('test', 'debug'))
+    assert(consoleObject.trace('test', 'info'))
+    assert(consoleObject.trace('test', 'warn'))
+    assert(consoleObject.trace('test', 'error'))
+  })
+
+  it('Log function with level INFO', function () {
+    var consoleObject = new Debug({
+      level: 'info',
       colors: false
     })
-    assert.equal(consoleObject.trace('test', 'info', true), 'test')
+    assert(!consoleObject.trace('test', 'debug'))
+    assert(consoleObject.trace('test', 'info'))
+    assert(consoleObject.trace('test', 'warn'))
+    assert(consoleObject.trace('test', 'error'))
+
+    assert(!consoleObject.debug('test'))
+    assert(consoleObject.info('test'))
+    assert(consoleObject.warn('test'))
+    assert(consoleObject.error('test'))
   })
+
+  it('Log function with level ERROR', function () {
+    var consoleObject = new Debug({
+      level: 'error',
+      colors: true
+    })
+    assert(!consoleObject.trace('test', 'debug'))
+    assert(!consoleObject.trace('test', 'info'))
+    assert(!consoleObject.trace('test', 'warn'))
+    assert(consoleObject.trace('test', 'error'))
+  })
+
+  it('Log function with default options', function () {
+    var consoleObject = new Debug();
+    assert(consoleObject.debug('test'))
+    assert(consoleObject.error('test'))
+  })
+
+  it('Log function with format arguments', function () {
+    var consoleObject = new Debug();
+    assert(consoleObject.info('%s=%s', 'str1', 334))
+    assert(consoleObject.info({ a: 111, b: 222, c: { d: 555, e: 'teste' } }))
+    assert(consoleObject.info('testing ', {f:'efff', g:'giii'} ))
+  })
+
+  it('Log configured by ENV level', function () {
+    process.env.LOGGER_LEVEL = 'error';
+    delete process.env.LOGGER_USE_COLORS;
+    delete require.cache[require.resolve('../index.js')]
+    var consoleObject = require('../index.js');
+    assert(consoleObject.error('test'));
+    assert(!consoleObject.warn('test'));
+    assert(consoleObject.options.colors);
+  })
+
+  it('Log configured by ENV colors=false', function () {
+    delete process.env.LOGGER_LEVEL;
+    process.env.LOGGER_USE_COLORS = 'false';
+    delete require.cache[require.resolve('../index.js')]
+    var consoleObject = require('../index.js');
+    assert(consoleObject.debug('test'));
+    assert(consoleObject.error('test'));
+    assert(!consoleObject.options.colors);
+  })
+
+  it('Log configured by ENV colors=true', function () {
+    process.env.LOGGER_LEVEL = 'info';
+    process.env.LOGGER_USE_COLORS = 'true';
+    delete require.cache[require.resolve('../index.js')]
+    var consoleObject = require('../index.js');
+    assert(!consoleObject.debug('test'));
+    assert(consoleObject.error('test'));
+    assert(consoleObject.options.colors);
+  })
+
 })
 
