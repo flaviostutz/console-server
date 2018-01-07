@@ -102,7 +102,7 @@ Debug.prototype.trace = function(msg, type) {
   appDir = path.dirname(__dirname)
 
   var p = this.get_file_parent()
-  func = ''
+  func = ' '
 
   if (p) {
     if (p.split(appDir)[1]) {
