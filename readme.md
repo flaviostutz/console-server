@@ -1,5 +1,5 @@
 # console-server
-Inpired on the great 'debug' module and derived from 'console-debug' module. This logging module was created to simplify logging by employing good features with no configuration needed.
+Inspired on the great 'debug' module and derived from 'console-debug' module. This logging module was created to simplify logging by employing good features with no configuration needed.
 
 ## Features
 
