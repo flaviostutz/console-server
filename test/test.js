@@ -179,5 +179,15 @@ describe('Console object', function() {
     assert(consoleObject.options.colors);
   })
 
+  it('Using module from npm org', function () {
+    process.env.LOGGER_LEVEL = 'info';
+    process.env.LOGGER_USE_COLORS = 'true';
+    delete require.cache[require.resolve('console-server')]
+    var consoleObject = require('console-server');
+    assert(!consoleObject.debug('test'));
+    assert(consoleObject.error('test'));
+    assert(consoleObject.options.colors);
+  })
+
 })
 

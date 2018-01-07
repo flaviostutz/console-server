@@ -1,6 +1,6 @@
 {
   "name": "console-server",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This logging module was created to simplify logging by employing good features with no configuration needed.",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "coveralls": "^2.11.13",
     "istanbul": "^0.4.1",
     "mocha": "^3.0.2",
+    "console-server": "^1.0.5",
     "mocha-lcov-reporter": "^1.0.0"
   }
 }
