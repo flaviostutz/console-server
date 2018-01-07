@@ -41,7 +41,6 @@ Debug.prototype.getCallerReference = function () {
   e = new Error();
   const stacks = e.stack.split('\n');
   stacks.every(function (line) {
-    console.log('>>>>> ' + line);
     if (!insideModule && line.indexOf('/console-server/debug.js') != -1) {
       insideModule = true;
     } else if (insideModule && line.indexOf('/console-server/debug.js') == -1) {

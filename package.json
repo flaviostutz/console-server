@@ -37,7 +37,7 @@
     "coveralls": "^2.11.13",
     "istanbul": "^0.4.1",
     "mocha": "^3.0.2",
-    "console-server": "^1.0.7",
+    "console-server": "^1.0.8",
     "mocha-lcov-reporter": "^1.0.0"
   }
 }
