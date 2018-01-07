@@ -17,26 +17,6 @@ var consoleObject = new Debug({
   colors: true,
 })
 
-describe('Stack getters', function() {
-  it('get_stack()', function() {
-    assert.doesNotThrow(function() {
-      consoleObject.get_stack()
-    }, Error)
-  })
-
-  it('get_stack_parent()', function() {
-    assert.doesNotThrow(function() {
-      consoleObject.get_stack_parent()
-    }, Error)
-  })
-
-  it('get_line_parent()', function() {
-    assert.doesNotThrow(function() {
-      consoleObject.get_line_parent()
-    }, Error)
-  })
-})
-
 describe('Internal functions', function() {
   it('Displaying a object', function() {
     assert(consoleObject.trace({
