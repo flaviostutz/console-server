@@ -1,6 +1,6 @@
 {
   "name": "console-server",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "This logging module was created to simplify logging by employing good features with no configuration needed.",
   "main": "index.js",
   "scripts": {
